@@ -8,6 +8,7 @@ const userinfo_schema = new Schema({
       status: { type: Boolean, required, default: false }, // online yoki ofline
       username: { type: String, required: false }, //username
       bio: { type: String, required: flase, default: " " }, // bio
+      img: { type: String, required: false } // rasmi base64 qilib saqlash 
 })
 
 export default mongoose.model("Confirmation Codes", userinfo_schema);

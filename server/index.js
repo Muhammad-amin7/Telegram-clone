@@ -25,6 +25,8 @@ dotenv.config()
 
 //  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( imports )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 import { portPassword } from './middlewares/Password.middlewares.js';
+import router from './routes/route.js';
+import { connectDB } from './config/connectDatebaze.js';
 
 
 
@@ -39,11 +41,25 @@ const PORT = process.env.PORT || 3333
 
 
 
+
+//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( connect date baze )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+connectDB()
+
+
+
+
 //  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( code start )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 app.use(`/`, portPassword, (requset, response) => {
       response.status(200).send("✅✅✅")
 })
+
+
+//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( routes )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// app.use(`/`, portPassword, router)
+
+
+
 
 
 
