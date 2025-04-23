@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer"
 import confirmationCode from "../schema/confirmationCode.js"
 
-export const sendCodeEmail = async (code, to) => {
+export const generateCode = async (code, to) => {
       try {
             const transporter = nodemailer.createTransport({
                   service: "gmail",
@@ -21,7 +21,9 @@ export const sendCodeEmail = async (code, to) => {
             const sendCode = new confirmationCode({
                   target: to,
                   code: code,
-                  created_at: new Date()
+                  created_at: new Date(),
+                  used: false,
+                  expires_at: new Date(Date.now() + 10 * 60 * 1000),
             })
 
             await transporter.sendMail(message)
