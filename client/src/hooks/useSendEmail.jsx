@@ -1,31 +1,29 @@
-import { useEffect, useState } from "react"
+import { useState } from "react";
 import userServices from "../service/user.service.js";
 
-export const useSendEmail = (email) => {
-      const [data, setData] = useState({})
-      const [loading, setLoading] = useState(false)
-      const [error, setError] = useState(null)
+export const useSendEmail = () => {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-      useEffect(() => {
-            const getInfo = async () => {
-                  setLoading(true)
-                  try {
-                        const resposne = await userServices.sendEmail(email)
-                        setData(resposne)
+  const sendEmail = async (email) => {
+    setLoading(true);
+    setError(null);
 
-                  } catch (error) {
-                        setError(error)
-                  }
-                  finally {
-                        setLoading(false)
-                  }
-            }
-            getInfo()
-      }, [])
+    try {
+      const response = await userServices.sendEmail(email);
+      setData(response);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      return {
-            data,
-            loading,
-            error,
-      }
-}
+  return {
+    sendEmail,
+    data,
+    loading,
+    error,
+  };
+};
