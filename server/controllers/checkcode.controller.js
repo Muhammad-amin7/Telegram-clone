@@ -5,8 +5,6 @@ export const checkCode = async (req, res) => {
       const { email, code } = req.body;
 
       try {
-            console.log(email + "Email");
-            console.log(code + "code");
 
             const findEmail = await confirmationCode.findOne({ target: email });
             const findUser = await UserSchema.findOne({ email });
@@ -16,12 +14,13 @@ export const checkCode = async (req, res) => {
             }
 
             if (findEmail.code === code) {
-                  res.status(200).send({ status: 200, info: findUser });
+                  await confirmationCode.deleteOne({ target: email })
+                  return res.status(200).send({ status: 200, info: findUser });
             } else {
-                  res.status(401).send({ status: 401, message: "Kod noto'g'ri" });
+                  return res.status(401).send({ status: 401, message: "Kod noto'g'ri" });
             }
       } catch (error) {
             console.error(error);
-            res.status(500).send({ status: 500, message: "Serverda xatolik yuz berdi" });
+            return res.status(500).send({ status: 500, message: "Serverda xatolik yuz berdi" });
       }
 };
