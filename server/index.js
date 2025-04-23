@@ -50,9 +50,7 @@ connectDB()
 
 //  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( code start )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-app.use(`/`, portPassword, (requset, response) => {
-      response.status(200).send("✅✅✅")
-})
+app.use(`/`, portPassword, router)
 
 
 //  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( routes )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

@@ -2,17 +2,18 @@ import nodemailer from "nodemailer"
 import confirmationCode from "../schema/confirmationCode.js"
 
 export const generateCode = async (code, to) => {
+
       try {
             const transporter = nodemailer.createTransport({
                   service: "gmail",
                   auth: {
-                        user: process.env.EMAIL_USER,
+                        user: process.env.EMAIL_ADMIN,
                         pass: process.env.EMAIL_PASS
                   }
             })
 
             const message = {
-                  from: process.env.EMAIL_USER,
+                  from: process.env.EMAIL_ADMIN,
                   to: to,
                   subject: 'Your Verification Code',
                   text: `Your verification code is: ${code}`,

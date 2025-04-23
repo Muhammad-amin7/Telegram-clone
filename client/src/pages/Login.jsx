@@ -1,7 +1,12 @@
 import React from 'react';
 import Logo from '../assets/images/telegram.png';
+import { useSendEmail } from '../hooks/useSendEmail';
 
 export default function Login() {
+
+  const { data, loading, error, } = useSendEmail("abduhalilovshohruh681@gmail.com")
+
+
   return (
     <section className="min-h-screen bg-neutral-900 flex items-center justify-center px-4">
       <div className="w-full max-w-md text-white space-y-6 text-center">
