@@ -1,9 +1,52 @@
-import React from 'react'
+import React from 'react';
+import Logo from '../assets/images/telegram.png';
 
 export default function Login() {
-      return (
-            <section className="w-full bg-black text-green">
-                  <h1 className='bg-red'>gsrg</h1>
-            </section>
-      )
+  return (
+    <section className="min-h-screen bg-neutral-900 flex items-center justify-center px-4">
+      <div className="w-full max-w-md text-white space-y-6 text-center">
+        <img src={Logo} alt="Telegram" className="w-28 h-28 mx-auto" />
+        <h1 className="text-4xl font-semibold">Telegram</h1>
+        <p className="text-gray-400">Confirm your country code and enter your Email.</p>
+
+        <form className="space-y-4 text-left">
+          <Field label="Country">
+            <select defaultValue="Uzbekistan" className={inputStyle}>
+              <option>Uzbekistan</option>
+              <option>USA</option>
+              <option>UK</option>
+            </select>
+          </Field>
+
+          <Field label="Email">
+            <input type="email" placeholder="@email.com" className={inputStyle} />
+          </Field>
+
+          <div className="flex items-center gap-2">
+            <input id="remember" type="checkbox" className="accent-violet-500" />
+            <label htmlFor="remember" className="text-sm">Keep me signed in</label>
+          </div>
+
+          <button type="submit" className={inputStyle}>
+            Continue
+          </button>
+        </form>
+
+        <a href="#" className="text-violet-400 text-sm hover:underline">Log in by QR code</a>
+      </div>
+    </section>
+  );
 }
+
+function Field({ label, children }) {
+  return (
+    <div>
+      <label className="block text-sm text-gray-300 mb-1">{label}</label>
+      {children}
+    </div>
+  );
+}
+
+const inputStyle = "w-full px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500";
+
+console.log(__filename)
