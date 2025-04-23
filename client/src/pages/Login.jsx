@@ -49,4 +49,3 @@ function Field({ label, children }) {
 
 const inputStyle = "w-full px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500";
 
-console.log(__filename)
