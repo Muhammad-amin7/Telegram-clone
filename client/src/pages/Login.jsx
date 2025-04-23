@@ -3,9 +3,20 @@ import Logo from '../assets/images/telegram.png';
 import { useSendEmail } from '../hooks/useSendEmail';
 
 export default function Login() {
+  const { data, loading, error } = useSendEmail("abduhalilovshohruh681@gmail.com");
 
-  const { data, loading, error, } = useSendEmail("abduhalilovshohruh681@gmail.com")
+  const handleSendEmail = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    useSendEmail(email);
+  };
 
+  console.log(data);
+
+  if (loading) {
+    return <h5 className="text-white text-center mt-10">Loading...</h5>;
+  }
 
   return (
     <section className="min-h-screen bg-neutral-900 flex items-center justify-center px-4">
@@ -14,15 +25,23 @@ export default function Login() {
         <h1 className="text-4xl font-semibold">Telegram</h1>
         <p className="text-gray-400">Confirm your country code and enter your Email.</p>
 
-        <form className="space-y-4 text-left">
+
+        {error && (
+          <div className="bg-red-500/20 text-red-400 text-sm px-4 py-2 rounded-md border border-red-500/30">
+            {error.message || "Nimanidur xato yozding Qo'chqor"}
+          </div>
+        )}
+
+        <form className="space-y-4 text-left" onSubmit={handleSendEmail}>
           <div>
             <label className="block text-sm text-gray-300 mb-1">Email</label>
-            <input type="email" placeholder="@email.com" className={inputStyle} />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <input id="remember" type="checkbox" className="accent-violet-500" />
-            <label htmlFor="remember" className="text-sm">Keep me signed in</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="@email.com"
+              className={inputStyle}
+              required
+            />
           </div>
 
           <button type="submit" className={inputStyle}>
