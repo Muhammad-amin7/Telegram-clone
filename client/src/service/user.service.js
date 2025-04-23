@@ -33,8 +33,12 @@ class UserServices {
       }
 
       async sendEmail(email) {
-            return this.request(`${this.baseUrl}/user`, 'POST', { email })
-      }
+            if (!email || typeof email !== 'string' || !email.includes('@')) {
+              throw new Error("Invalid email address");
+            }
+            return this.request(`${this.baseUrl}/user`, 'POST', { email });
+          }
+          
 }
 
 const userServices = new UserServices()
