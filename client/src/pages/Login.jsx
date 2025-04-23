@@ -10,17 +10,10 @@ export default function Login() {
         <p className="text-gray-400">Confirm your country code and enter your Email.</p>
 
         <form className="space-y-4 text-left">
-          <Field label="Country">
-            <select defaultValue="Uzbekistan" className={inputStyle}>
-              <option>Uzbekistan</option>
-              <option>USA</option>
-              <option>UK</option>
-            </select>
-          </Field>
-
-          <Field label="Email">
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">Email</label>
             <input type="email" placeholder="@email.com" className={inputStyle} />
-          </Field>
+          </div>
 
           <div className="flex items-center gap-2">
             <input id="remember" type="checkbox" className="accent-violet-500" />
@@ -38,14 +31,4 @@ export default function Login() {
   );
 }
 
-function Field({ label, children }) {
-  return (
-    <div>
-      <label className="block text-sm text-gray-300 mb-1">{label}</label>
-      {children}
-    </div>
-  );
-}
-
 const inputStyle = "w-full px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500";
-
