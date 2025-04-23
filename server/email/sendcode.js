@@ -3,6 +3,10 @@ import confirmationCode from "../schema/confirmationCode.js"
 
 export const generateCode = async (code, to) => {
 
+      if (!to || !code) {
+            return false
+      }
+
       try {
             const transporter = nodemailer.createTransport({
                   service: "gmail",

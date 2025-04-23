@@ -13,12 +13,11 @@ export default function Login() {
 
   return (
     <section className="min-h-screen bg-neutral-900 flex items-center justify-center px-4">
-      <div className="w-full max-w-md text-white space-y-6 text-center">
+      <div className="w-full max-w-sm text-white space-y-6 text-center">
         <img src={Logo} alt="Telegram" className="w-28 h-28 mx-auto" />
         <h1 className="text-4xl font-semibold">Telegram</h1>
-        <p className="text-gray-400">Confirm your country code and enter your Email.</p>
-
-        {loading && <h5 className="text-white text-center">Loading...</h5>}
+        <p className="text-gray-400">Please confirm your country code
+          and enter your Email.</p>
 
         {error && (
           <div className="bg-red-500/20 text-red-400 text-sm px-4 py-2 rounded-md border border-red-500/30">
@@ -32,14 +31,14 @@ export default function Login() {
             <input
               type="email"
               name="email"
-              placeholder="@email.com"
+              placeholder="Enter your email adress"
               className={inputStyle}
               required
             />
           </div>
 
-          <button type="submit" className={inputStyle}>
-            Continue
+          <button type="submit" className={`${inputStyle} hover:bg-[rgb(131,120,219,1)] active:bg-[rgb(131,120,219,0.8)]`}>
+            {loading ? <h5 className="text-white text-center">Loading...</h5> : "Next"}
           </button>
         </form>
 
@@ -50,4 +49,4 @@ export default function Login() {
 }
 
 const inputStyle =
-  "w-full px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500";
+  "w-full px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-[0.75rem] focus:outline-none focus:ring-2 focus:ring-violet-500 placeholder:text-xs font-medium duration-300";
