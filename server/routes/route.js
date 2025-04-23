@@ -5,7 +5,7 @@ import { checkCode } from "../controllers/checkcode.controller.js"
 const router = Router()
 
 router.post("/user", sendCode)
-router.get("/user", checkCode)
+router.post("/user/code", checkCode)
 
 
 export default router

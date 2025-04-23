@@ -5,10 +5,10 @@ const userinfo_schema = new Schema({
       lastName: { type: String, required: false }, // familyasi
       telephone: { type: Number, required: true }, // nomeri
       email: { type: String, required: true }, //nomerdan kegin email sorasin 
-      status: { type: Boolean, required, default: false }, // online yoki ofline
+      status: { type: Boolean, required: true, default: false }, // online yoki ofline
       username: { type: String, required: false }, //username
-      bio: { type: String, required: flase, default: " " }, // bio
+      bio: { type: String, required: false, default: " " }, // bio
       img: { type: String, required: false } // rasmi base64 qilib saqlash 
 })
 
-export default mongoose.model("Confirmation Codes", userinfo_schema);
+export default mongoose.models['User Info'] || mongoose.model('User Info', userinfo_schema);

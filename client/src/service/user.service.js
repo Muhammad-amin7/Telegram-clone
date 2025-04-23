@@ -39,8 +39,8 @@ class UserServices {
             return this.request(`${this.baseUrl}/user`, 'POST', { email });
       }
 
-      async getUserInfo(code, email) {
-            return this.request(`${this.baseUrl}/user`, 'GET', { email: email, code : code});
+      async getUserInfo(email, code) {
+            return this.request(`${this.baseUrl}/user/code`, 'POST', { email: email, code: code });
       }
 
 }

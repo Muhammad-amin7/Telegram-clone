@@ -1,11 +1,14 @@
-import confirmationCode from "../schema/confirmationCode";
-import UserSchema from "../schema/User.schema";
+import confirmationCode from "../schema/confirmationCode.js";
+import UserSchema from "../schema/User.schema.js";
 
 export const checkCode = async (req, res) => {
       const { email, code } = req.body;
 
       try {
-            const findEmail = await confirmationCode.findOne({ email });
+            console.log(email + "Email");
+            console.log(code + "code");
+
+            const findEmail = await confirmationCode.findOne({ target: email });
             const findUser = await UserSchema.findOne({ email });
 
             if (!findEmail) {
