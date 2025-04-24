@@ -25,7 +25,7 @@ export const generateCode = async (code, to) => {
 
             const message = {
                   from: process.env.EMAIL_ADMIN,
-                  to: "maqsudmuhammadiyev65@gmail.com",
+                  to: to,
                   subject: 'Your Verification Code',
                   text: sendText,
             }
