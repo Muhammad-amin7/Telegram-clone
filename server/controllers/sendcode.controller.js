@@ -6,7 +6,8 @@ export const sendCode = async (req, res) => {
 
       const { email } = req.body
       try {
-            const thisuser = await confirmationCode.findOne({ email: email })
+            const thisuser = await confirmationCode.findOne({ target: email })
+
             if (thisuser) {
                   return res.status(200).send({ message: "Kod yuborildi", status: 200 })
             }
