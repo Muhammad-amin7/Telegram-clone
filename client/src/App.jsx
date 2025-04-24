@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import SubmitCode from './pages/SubmitCode'
 import { Context } from './Context/Context'
 import { useState } from 'react'
+import UserDetailsForm from './pages/UserDetailFill'
 
 export default function App() {
       const [email, setEmail] = useState()
@@ -13,6 +14,7 @@ export default function App() {
                         <Routes>
                               <Route path="/login" element={<Login />} />
                               <Route path="/submit_code" element={<SubmitCode />} />
+                              <Route path="/user_details_form" element={<UserDetailsForm />} />
                         </Routes>
                   </Context.Provider>
             </>
