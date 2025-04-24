@@ -11,30 +11,33 @@ export default function SubmitCode() {
 
       useEffect(() => {
             if (!email) {
-                  return navigate("/login")
+              navigate("/login");
             }
-      }, [])
+          }, [email, navigate]);
+          
 
-      if (data.status === 200) {
-            return navigate("/user_details_form")
-      }
-
-      const handlerSendCode = (e) => {
-            if (!loading) {
-                  e.preventDefault()
-                  const code = new FormData(e.target).get("code");
-                  sendCode(email, code);
+      const handlerSendCode = async (e) => {
+            e.preventDefault();
+            if (loading) return;
+          
+            const code = new FormData(e.target).get("code");
+            const response = await sendCode(email, code);
+          
+            if (response?.status === 200) {
+              navigate("/user_details_form");
+            } else {
+              console.log(response);
             }
-      }
+          };
+          
 
       return (
-            <section className='min-h-screen bg-neutral-900 flex items-center justify-center px-4'>
-                  <div className='w-full max-w-sm text-white space-y-6 text-center'>
-                        <img src={monkey} alt="" className='w-40 h-40 mx-auto' />
-                        <h1 className='text-4xl font-semibold'>{email}</h1>
+            <section className='max-h-screen bg-neutral-900 flex items-center justify-center px-4'>
+                  <div className='w-full  text-white space-y-6 text-center flex flex-col items-center justify-center'>
+                        <img src={monkey} alt="" className='max-w-sm h-40 mx-auto ' />
+                        <h1 className='text-4xl max-w-3xl font-semibold'>{email}</h1>
                         <p className='text-gray-400'>We've sent the code to the your Email</p>
-                        <form className="space-y-4 text-left" onSubmit={handlerSendCode}>
-                              <div>
+                        <form className="space-y-4 w-full max-w-sm" onSubmit={handlerSendCode}>                              <div>
                                     <label className="block text-sm text-gray-300 mb-1">Code</label>
                                     <input
                                           type="text"
