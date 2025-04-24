@@ -1,24 +1,37 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import monkey from "../assets/images/Monkey.png"
 import { useGetInfo } from '../hooks/useGetUserInfo';
+import { Context } from '../Context/Context';
+import { useNavigate } from 'react-router-dom';
 
 export default function SubmitCode() {
       const { sendCode, data, loading, error, } = useGetInfo()
+      const { email } = useContext(Context)
+      const navigate = useNavigate()
 
-      const handlerSendCode = (e) => {
-            e.preventDefault()
-            const code = new FormData(e.target).get("code");
-            const email = "abduhalilovshohruh681@gmail.com"
-            sendCode(email, code);
+      useEffect(() => {
+            if (!email) {
+                  return navigate("/login")
+            }
+      }, [])
+
+      if (data.status === 200) {
+            return navigate("/home")
       }
 
-      console.log(data);
+      const handlerSendCode = (e) => {
+            if (!loading) {
+                  e.preventDefault()
+                  const code = new FormData(e.target).get("code");
+                  sendCode(email, code);
+            }
+      }
 
       return (
             <section className='min-h-screen bg-neutral-900 flex items-center justify-center px-4'>
                   <div className='w-full max-w-sm text-white space-y-6 text-center'>
                         <img src={monkey} alt="" className='w-40 h-40 mx-auto' />
-                        <h1 className='text-4xl font-semibold capitalize'>email</h1>
+                        <h1 className='text-4xl font-semibold'>{email}</h1>
                         <p className='text-gray-400'>We've sent the code to the your Email</p>
                         <form className="space-y-4 text-left" onSubmit={handlerSendCode}>
                               <div>
@@ -33,7 +46,7 @@ export default function SubmitCode() {
                               </div>
 
                               <button type="submit" className={`${inputStyle} hover:bg-[rgb(131,120,219,1)] active:bg-[rgb(131,120,219,0.8)]`}>
-                                    Next
+                                    {loading ? "Loading..." : 'Next'}
                               </button>
                         </form>
                   </div>

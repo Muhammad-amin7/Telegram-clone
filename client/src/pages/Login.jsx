@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '../assets/images/telegram.png';
 import { useSendEmail } from '../hooks/useSendEmail';
 import { useNavigate } from 'react-router-dom';
+import { Context } from '../Context/Context';
 
 export default function Login() {
   const { sendEmail, data, loading, error } = useSendEmail();
   const navigate = useNavigate()
+  const { setEmail } = useContext(Context)
 
   const handleSendEmail = (e) => {
     e.preventDefault();
     const email = new FormData(e.target).get("email");
     sendEmail(email); // correct and safe usage
+    setEmail(email)
+
   };
 
   if (data?.status === 200) {
