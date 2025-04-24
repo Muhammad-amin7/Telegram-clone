@@ -47,8 +47,8 @@ export default function Login() {
             />
           </div>
 
-          <button type="submit" className={`${inputStyle} hover:bg-[rgb(131,120,219,1)] active:bg-[rgb(131,120,219,0.8)]`}>
-            {loading ? <h5 className="text-white text-center">Loading...</h5> : "Next"}
+          <button type="submit" className={`${inputStyle} hover:bg-violet-500 active:bg-[rgb(131,120,219,0.8)]`}>
+            {loading ? 'Loading...': "Next"}
           </button>
         </form>
 
