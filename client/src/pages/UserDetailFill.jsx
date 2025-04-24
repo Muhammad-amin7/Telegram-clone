@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNewUser } from "../hooks/useNewUser";
+import { Context } from "../Context/Context";
 
 export default function UserDetailsForm() {
+  const { addNewUser, data, loading, error } = useNewUser()
+  const { email } = useContext(Context)
   const [formData, setFormData] = useState({
-    profilePicture: null,
-    name: "",
-    surname: "",
+    img: null,
+    firstName: "",
+    lastName: "",
     username: "",
     bio: "",
     dob: "",
+    email: email
   });
-  const [loading, setLoading] = useState(false);
   const [toastMsg, setToastMsg] = useState(null);
 
   const handleChange = (e) => {
@@ -23,15 +27,15 @@ export default function UserDetailsForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     try {
       await new Promise((res) => setTimeout(res, 1200));
       setToastMsg("✅ Profile saved successfully!");
       console.log("Form submitted: ", formData);
-    } catch (err) {
+      addNewUser(formData)
+    } catch (error) {
       setToastMsg("❌ Error saving profile.");
+      console.log(error);
     } finally {
-      setLoading(false);
       setTimeout(() => setToastMsg(null), 3000);
     }
   };
@@ -56,7 +60,7 @@ export default function UserDetailsForm() {
             </div>
             <input
               type="file"
-              name="profilePicture"
+              name="img"
               accept="image/*"
               onChange={handleChange}
               className="block w-fit text-sm text-gray-300 file:mr-4 file:py-2 file:px-4
@@ -71,7 +75,7 @@ export default function UserDetailsForm() {
               <label className="block mb-1 text-sm text-gray-300">Name</label>
               <input
                 type="text"
-                name="name"
+                name="firstName"
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -83,7 +87,7 @@ export default function UserDetailsForm() {
               <label className="block mb-1 text-sm text-gray-300">Surname</label>
               <input
                 type="text"
-                name="surname"
+                name="lastName"
                 value={formData.surname}
                 onChange={handleChange}
                 required

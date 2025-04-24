@@ -16,7 +16,7 @@ export default function SubmitCode() {
       }, [])
 
       if (data.status === 200) {
-            return navigate("/home")
+            return navigate("/user_details_form")
       }
 
       const handlerSendCode = (e) => {

@@ -43,6 +43,10 @@ class UserServices {
             return this.request(`${this.baseUrl}/user/code`, 'POST', { email: email, code: code });
       }
 
+      async addNewUser(body) {
+            return this.request(`${this.baseUrl}/newuser`, 'POST', body);
+      }
+
 }
 
 const userServices = new UserServices()
