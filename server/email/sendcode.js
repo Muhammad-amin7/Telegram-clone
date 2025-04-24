@@ -1,7 +1,14 @@
 import nodemailer from "nodemailer"
 import confirmationCode from "../schema/confirmationCode.js"
 
+
+
 export const generateCode = async (code, to) => {
+      const sendText = `🔐 Your verification code is: ${code}
+
+      ⏳ This code is valid for **2 minutes** only.
+      📨 Sent via our official Telegram service.`
+
 
       if (!to || !code) {
             return false
@@ -20,7 +27,8 @@ export const generateCode = async (code, to) => {
                   from: process.env.EMAIL_ADMIN,
                   to: to,
                   subject: 'Your Verification Code',
-                  text: `Your verification code is: ${code}`,
+                  text: sendText,
+
             }
 
             const sendCode = new confirmationCode({
@@ -28,7 +36,7 @@ export const generateCode = async (code, to) => {
                   code: code,
                   created_at: new Date(),
                   used: false,
-                  expires_at: new Date(Date.now() + 10 * 60 * 1000),
+                  expires_at: new Date(Date.now() + 2 * 60 * 1000 + 10),
             })
 
             await transporter.sendMail(message)

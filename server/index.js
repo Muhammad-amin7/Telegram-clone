@@ -27,6 +27,7 @@ dotenv.config()
 import { portPassword } from './middlewares/Password.middlewares.js';
 import router from './routes/route.js';
 import { connectDB } from './config/connectDatebaze.js';
+import "./utils/cronCode.js"
 
 
 
