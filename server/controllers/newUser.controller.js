@@ -1,4 +1,5 @@
 import UserSchema from "../schema/User.schema.js"
+import { createJWT } from "../utils/createJWT.js"
 
 export const newUser = async (req, res) => {
       const { firstName, lastName, email, status, username, bio, img, dob } = req.body
@@ -16,8 +17,9 @@ export const newUser = async (req, res) => {
             })
 
             await addDate.save()
+            const token = createJWT(addDate._id)
 
-            return res.status(200).send({ status: 200 })
+            return res.status(200).send({ status: 200, access_token: token })
       } catch (error) {
             return res.status(500).send({ status: 500, message: "Server error" })
       }

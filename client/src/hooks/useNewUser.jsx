@@ -11,6 +11,7 @@ export const useNewUser = () => {
             try {
                   const response = await userServices.addNewUser(body)
                   setData(response)
+                  console.log(response);
             } catch (error) {
                   setError(error)
             }

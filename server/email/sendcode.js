@@ -28,7 +28,6 @@ export const generateCode = async (code, to) => {
                   to: to,
                   subject: 'Your Verification Code',
                   text: sendText,
-
             }
 
             const sendCode = new confirmationCode({

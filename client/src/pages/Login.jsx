@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Logo from '../assets/images/telegram.png';
 import { useSendEmail } from '../hooks/useSendEmail';
 import { useNavigate } from 'react-router-dom';
@@ -9,17 +9,20 @@ export default function Login() {
   const navigate = useNavigate()
   const { setEmail } = useContext(Context)
 
+  useEffect(() => {
+    if (data?.status === 200) {
+      navigate('/submit_code')
+    }
+  }, [data])
+
   const handleSendEmail = (e) => {
     e.preventDefault();
     const email = new FormData(e.target).get("email");
     sendEmail(email); // correct and safe usage
     setEmail(email)
-
   };
 
-  if (data?.status === 200) {
-    navigate('/submit_code')
-  }
+
 
   return (
     <section className="min-h-screen bg-neutral-900 flex items-center justify-center px-4">
@@ -48,7 +51,7 @@ export default function Login() {
           </div>
 
           <button type="submit" className={`${inputStyle} hover:bg-violet-500 active:bg-[rgb(131,120,219,0.8)]`}>
-            {loading ? 'Loading...': "Next"}
+            {loading ? 'Loading...' : "Next"}
           </button>
         </form>
 
