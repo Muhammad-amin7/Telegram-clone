@@ -1,5 +1,6 @@
 import confirmationCode from "../schema/confirmationCode.js";
 import UserSchema from "../schema/User.schema.js";
+import { createJWT } from "../utils/createJWT.js";
 
 export const checkCode = async (req, res) => {
       const { email, code } = req.body;
