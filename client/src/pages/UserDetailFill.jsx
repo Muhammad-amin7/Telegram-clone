@@ -78,7 +78,7 @@ export default function UserDetailsForm() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* First Name */}
             <div>
-              <label className="ml-0.5 block mb-1 text-sm text-gray-300">Name</label>
+              <label className="block mb-1 text-sm text-gray-300">Name</label>
               <input
                 type="text"
                 name="firstName"
@@ -91,7 +91,7 @@ export default function UserDetailsForm() {
             </div>
             {/* Last Name */}
             <div>
-              <label className="ml-0.5 block mb-1 text-sm text-gray-300">Surname</label>
+              <label className="block mb-1 text-sm text-gray-300">Surname</label>
               <input
                 type="text"
                 name="lastName"
@@ -103,7 +103,7 @@ export default function UserDetailsForm() {
             </div>
             {/* Username */}
             <div>
-              <label className="ml-0.5 block mb-1 text-sm text-gray-300">Username</label>
+              <label className="block mb-1 text-sm text-gray-300">Username</label>
               <input
                 type="text"
                 name="username"
@@ -115,7 +115,7 @@ export default function UserDetailsForm() {
             </div>
             {/* Date of Birth */}
             <div>
-              <label className="ml-0.5 block mb-1 text-sm text-gray-300">Date of Birth</label>
+              <label className="block mb-1 text-sm text-gray-300">Date of Birth</label>
               <input
                 type="date"
                 name="dob"
@@ -128,7 +128,7 @@ export default function UserDetailsForm() {
 
           {/* Bio */}
           <div>
-            <label className="ml-0.5 block mb-1 text-sm text-gray-300">Short Bio</label>
+            <label className="block mb-1 text-sm text-gray-300">Short Bio</label>
             <textarea
               name="bio"
               value={formData.bio}
