@@ -23,9 +23,6 @@ class UserServices {
 
             try {
                   const response = await fetch(url, options)
-                  if (!response.ok) {
-                        throw new Error('Xatolik yuz berdi')
-                  }
                   return await response.json()
             } catch (error) {
                   console.log(error)

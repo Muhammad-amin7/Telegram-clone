@@ -63,6 +63,7 @@ export default function Home() {
     };
 
     const activeChat = chats.find(chat => chat.id === activeChatId);
+    console.log(activeChat);
 
     return (
         <div className="flex h-screen bg-neutral-800">
@@ -109,7 +110,7 @@ export default function Home() {
 
             {/* Right Chat Area */}
             <main className="flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden relative">
-                <ChatInput />
+                <ChatInput id={activeChat?.id} />
                 {activeChat ? (
                     <div className="text-center text-white">
                         <h2 className="text-2xl font-semibold mb-2">{activeChat.name}</h2>

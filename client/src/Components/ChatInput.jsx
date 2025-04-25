@@ -2,14 +2,16 @@ import React from 'react'
 import { BsSend } from "react-icons/bs";
 import { useSendChat } from '../hooks/useSendChat';
 
-export default function ChatInput() {
+export default function ChatInput({ id }) {
 
       const { sendChat, data, loading, error } = useSendChat()
 
       const handleSend = (e) => {
             e.preventDefault()
             const text = new FormData(e.target).get("message")
-            sendChat(text)
+            sendChat(text, id)
+
+            console.log(error);
       }
 
       return (
