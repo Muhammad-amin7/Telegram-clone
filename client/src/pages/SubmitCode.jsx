@@ -36,13 +36,13 @@ export default function SubmitCode() {
 
 
       return (
-            <section className='max-h-screen bg-neutral-900 flex items-center justify-center px-4'>
+            <section className='h-[100vh] bg-neutral-900 flex items-center justify-center px-4 '>
                   <div className='w-full  text-white space-y-6 bg-neutral-900 text-center flex flex-col items-center justify-center'>
                         <img src={monkey} alt="" className='max-w-sm h-40 mx-auto ' />
                         <h1 className='text-4xl max-w-3xl font-semibold'>{email}</h1>
                         <p className='text-gray-400'>We've sent the code to the your Email</p>
-                        <form className="space-y-4 w-full max-w-sm" onSubmit={handlerSendCode}>                              <div>
-                              <label className="block text-sm text-gray-300 mb-1">Code</label>
+                        <form className="space-y-4 w-full max-w-sm text-start" onSubmit={handlerSendCode}>                              <div>
+                              <label className="block text-sm text-gray-300 mb-1 ml-0.5">Code</label>
                               <input
                                     type="text"
                                     name="code"
