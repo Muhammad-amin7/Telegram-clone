@@ -40,7 +40,7 @@ export default function Login() {
 
         <form className="space-y-4 text-left" onSubmit={handleSendEmail}>
           <div>
-            <label className="block text-sm text-gray-300 mb-1">Email</label>
+            <label className="ml-0.5 block text-sm text-gray-300 mb-1">Email</label>
             <input
               type="email"
               name="email"
