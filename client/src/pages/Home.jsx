@@ -69,20 +69,20 @@ export default function Home() {
             {/* Left Sidebar */}
             <aside className="w-full md:w-[320px] flex flex-col bg-tg-secondary-bg flex-shrink-0 border-r border-gray-700">
                 <div className="p-2 flex items-center space-x-2 flex-shrink-0">
-                <button
-                    ref={menuButtonRef}
-                    onClick={toggleMenu}
-                    className="p-2 rounded-full bg-tg-secondary-bg text-gray-300 hover:text-white hover:bg-tg-hover-bg focus:outline-none focus:ring-1 focus:ring-tg-accent"
-                    aria-label="Open menu"
-                    aria-expanded={isMenuOpen}
-                    aria-controls="sidebar-menu-content"
-                >
-                    <HamburgerIcon />
-                </button>
+                    <button
+                        ref={menuButtonRef}
+                        onClick={toggleMenu}
+                        className="p-2 rounded-full bg-tg-secondary-bg text-gray-300 hover:text-white hover:bg-tg-hover-bg focus:outline-none focus:ring-1 focus:ring-tg-accent"
+                        aria-label="Open menu"
+                        aria-expanded={isMenuOpen}
+                        aria-controls="sidebar-menu-content"
+                    >
+                        <HamburgerIcon />
+                    </button>
                     <input type="text" placeholder="Search" className="w-full bg-[rgb(55,55,55)] rounded-full px-4 py-1.5 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-tg-accent" />
                 </div>
-                 {isMenuOpen && (
-                     <div
+                {isMenuOpen && (
+                    <div
                         ref={menuRef}
                         id="sidebar-menu-content"
                         className="absolute top-14 left-2 w-60 bg-neutral-800 rounded-lg shadow-xl p-2 z-20 border border-gray-700"
@@ -98,11 +98,11 @@ export default function Home() {
                 )}
 
                 <div className="flex-grow overflow-y-auto overflow-x-hidden">
-                   <ChatList
+                    <ChatList
                         chats={chats}
                         activeChatId={activeChatId}
                         onChatSelect={handleChatSelect}
-                   />
+                    />
                 </div>
             </aside>
 

@@ -9,23 +9,29 @@ export default function SubmitCode() {
       const { email } = useContext(Context)
       const navigate = useNavigate()
 
+      // if the user didn't submit email navigate login page
       useEffect(() => {
             if (!email) {
                   navigate("/login");
             }
       }, [email, navigate]);
 
+      // If the user is already registered, navigate to the home page.
+      // else navigate to the user details form page.
       useEffect(() => {
             if (data.status !== 200) return
             if (data.info === null) {
                   return navigate("/user_details_form")
             }
             else {
-                  console.log(data.info);
+                  if (data?.access_token) {
+                        localStorage.setItem('token', data.access_token)
+                  }
+                  return navigate("/home")
             }
       }, [data])
 
-
+      //    submit infos to the backend
       const handlerSendCode = async (e) => {
             e.preventDefault();
             if (loading) return;

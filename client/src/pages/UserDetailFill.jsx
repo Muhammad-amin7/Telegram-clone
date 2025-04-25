@@ -1,9 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNewUser } from "../hooks/useNewUser";
 import { Context } from "../Context/Context";
+import { useNavigate } from "react-router-dom";
 
 export default function UserDetailsForm() {
   const { addNewUser, data, loading, error } = useNewUser()
+  const navigate = useNavigate()
   const { email } = useContext(Context)
   const [formData, setFormData] = useState({
     img: null,
@@ -14,7 +16,6 @@ export default function UserDetailsForm() {
     dob: "",
     email: email
   });
-  const [toastMsg, setToastMsg] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -25,19 +26,18 @@ export default function UserDetailsForm() {
     }
   };
 
+  useEffect(() => {
+    if (data?.access_token) {
+      localStorage.setItem('token', data.access_token)
+    }
+    if (!loading && !error && data?.status === 200) {
+      return navigate("/home")
+    }
+  }, [data])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await new Promise((res) => setTimeout(res, 1200));
-      setToastMsg("✅ Profile saved successfully!");
-      console.log("Form submitted: ", formData);
-      addNewUser(formData)
-    } catch (error) {
-      setToastMsg("❌ Error saving profile.");
-      console.log(error);
-    } finally {
-      setTimeout(() => setToastMsg(null), 3000);
-    }
+    addNewUser(formData)
   };
 
   const imageUrl = formData.profilePicture
@@ -72,7 +72,7 @@ export default function UserDetailsForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block mb-1 text-sm text-gray-300">Name</label>
+              <label className="block mb-1 text-sm text-gray-300">First name</label>
               <input
                 type="text"
                 name="firstName"
@@ -84,13 +84,12 @@ export default function UserDetailsForm() {
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm text-gray-300">Surname</label>
+              <label className="block mb-1 text-sm text-gray-300">Last name</label>
               <input
                 type="text"
                 name="lastName"
                 value={formData.surname}
                 onChange={handleChange}
-                required
                 className="w-full bg-zinc-800! border border-zinc-700! rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
                 placeholder="Doe"
               />
@@ -102,7 +101,6 @@ export default function UserDetailsForm() {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                required
                 className="w-full bg-zinc-800! border border-zinc-700! rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
                 placeholder="@johndoe"
               />
@@ -114,7 +112,6 @@ export default function UserDetailsForm() {
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
-                required
                 className="w-full bg-zinc-800! border border-zinc-700! rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -146,10 +143,6 @@ export default function UserDetailsForm() {
               "Save Details"
             )}
           </button>
-
-          {toastMsg && (
-            <div className="text-center mt-4 text-sm text-green-400">{toastMsg}</div>
-          )}
         </form>
       </div>
     </div>

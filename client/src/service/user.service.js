@@ -47,6 +47,11 @@ class UserServices {
             return this.request(`${this.baseUrl}/newuser`, 'POST', body);
       }
 
+
+      async sendToken(token) {
+            return this.request(`${this.baseUrl}/token`, 'GET', null, token);
+      }
+
 }
 
 const userServices = new UserServices()
