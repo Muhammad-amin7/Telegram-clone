@@ -52,6 +52,10 @@ class UserServices {
             return this.request(`${this.baseUrl}/token`, 'GET', null, token);
       }
 
+
+      async sendChat(body, token) {
+            return this.request(`${this.baseUrl}/newchat`, 'POST', body, token);
+      }
 }
 
 const userServices = new UserServices()

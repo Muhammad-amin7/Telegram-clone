@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import ChatList from '../Components/ChatList';
+import ChatInput from '../components/chatInput';
 
 // --- Icons ---
 const HamburgerIcon = () => (
@@ -107,7 +108,8 @@ export default function Home() {
             </aside>
 
             {/* Right Chat Area */}
-            <main className="flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden">
+            <main className="flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden relative">
+                <ChatInput />
                 {activeChat ? (
                     <div className="text-center text-white">
                         <h2 className="text-2xl font-semibold mb-2">{activeChat.name}</h2>

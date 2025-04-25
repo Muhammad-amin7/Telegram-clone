@@ -8,9 +8,12 @@ import Home from './pages/Home'
 import userServices from './service/user.service'
 
 export default function App() {
+      // user's email
       const [email, setEmail] = useState()
+      // user's all info
+      const [userdata, setuserdata] = useState({})
       const navigate = useNavigate()
-      
+
       // sendToken
       useEffect(() => {
             const token = localStorage.getItem('token')
@@ -20,6 +23,7 @@ export default function App() {
                         const response = await userServices.sendToken(token)
 
                         if (response?.status === 200 && response?.info) {
+                              setuserdata(response.info)
                               navigate('/home')
                         }
                         else {
@@ -34,7 +38,7 @@ export default function App() {
 
       return (
             <>
-                  <Context.Provider value={{ email, setEmail }}>
+                  <Context.Provider value={{ email, setEmail, userdata }}>
                         <Routes>
                               <Route path="/login" element={<Login />} />
                               <Route path="/submit_code" element={<SubmitCode />} />
