@@ -1,8 +1,8 @@
 // src/components/Home.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import ChatList from '../Components/ChatList';
-import ChatInput from '../components/chatInput';
+import ChatList from '../components/ChatList';
+import ChatInput from '../components/ChatInput';
 
 // --- Icons ---
 const HamburgerIcon = () => (
