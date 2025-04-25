@@ -37,7 +37,7 @@ export default function SubmitCode() {
 
       return (
             <section className='max-h-screen bg-neutral-900 flex items-center justify-center px-4'>
-                  <div className='w-full  text-white space-y-6 text-center flex flex-col items-center justify-center'>
+                  <div className='w-full  text-white space-y-6 bg-neutral-900 text-center flex flex-col items-center justify-center'>
                         <img src={monkey} alt="" className='max-w-sm h-40 mx-auto ' />
                         <h1 className='text-4xl max-w-3xl font-semibold'>{email}</h1>
                         <p className='text-gray-400'>We've sent the code to the your Email</p>

@@ -25,8 +25,8 @@ export default function Login() {
 
 
   return (
-    <section className="min-h-screen bg-neutral-900 flex items-center justify-center px-4">
-      <div className="w-full max-w-sm text-white space-y-6 text-center">
+    <section className="min-h-screen bg-neutral-800 flex items-center justify-center px-4">
+      <div className="w-full max-w-sm text-white space-y-6 text-center bg-[rgb(33, 33, 33)]">
         <img src={Logo} alt="Telegram" className="w-40 h-40 mx-auto" />
         <h1 className="text-4xl font-semibold">Telegram</h1>
         <p className="text-gray-400">Please confirm your country code

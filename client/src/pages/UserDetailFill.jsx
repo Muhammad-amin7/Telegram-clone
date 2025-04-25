@@ -45,11 +45,11 @@ export default function UserDetailsForm() {
     : null;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[rgb(33,33,33)] px-4 py-8 text-white font-sans">
-      <div className="w-full max-w-2xl bg-[#1e1e1e] rounded-2xl shadow-2xl p-8 animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center bg-neutral-800 px-4 py-8 text-white font-sans">
+      <div className="w-full max-w-2xl bg-neutral-800 rounded-2xl shadow-2xl p-8 animate-fade-in">
         <h2 className="text-3xl font-semibold text-center mb-8 text-white">Your Profile</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 bg-neutral-800">
           <div className="flex flex-col items-center gap-4">
             <div className="w-28 h-28 rounded-full overflow-hidden bg-zinc-800! border border-zinc-600 shadow-md">
               {imageUrl ? (
