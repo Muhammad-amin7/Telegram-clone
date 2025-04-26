@@ -53,6 +53,10 @@ class UserServices {
       async sendChat(body, token) {
             return this.request(`${this.baseUrl}/newchat`, 'POST', body, token);
       }
+
+      async findChat(to, token) {
+            return this.request(`${this.baseUrl}/chat/${to}`, 'GET', null, token);
+      }
 }
 
 const userServices = new UserServices()
