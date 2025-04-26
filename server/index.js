@@ -6,7 +6,6 @@ app.use(express.json())
 
 
 
-
 //  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( cors )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 import cors from 'cors'
 app.use(cors())
@@ -28,9 +27,36 @@ import { portPassword } from './middlewares/Password.middlewares.js';
 import router from './routes/route.js';
 import { connectDB } from './config/connectDatebaze.js';
 import "./utils/cronCode.js"
+import http from 'http'
 
 
 
+
+
+
+
+//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( socket.io )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+import { Server } from 'socket.io';
+import UserSchema from './schema/User.schema.js';
+const server = http.createServer(app)
+const io = new Server(server, {
+      cors: {
+            origin: "*",
+            methods: '*'
+      }
+})
+
+io.on('connection', async (so) => {
+      so.on('isOnline', async (data) => {
+            await UserSchema.findOneAndUpdate({ email: data.email }, { socketID: data.id })
+            console.log(data);
+
+      })
+
+      so.on('disconnect', async () => {
+            await UserSchema.findOneAndUpdate({ socket_id: so.id }, { socket_id: null })
+      })
+})
 
 
 
@@ -66,4 +92,4 @@ app.use(`/`, portPassword, router)
 
 
 //  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( server port )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-app.listen(PORT, console.log(`✅ Server successfully working\n📡 Port:${PORT}\n`))
+server.listen(PORT, console.log(`✅ Server successfully working\n📡 Port:${PORT}\n`))

@@ -8,7 +8,8 @@ const userinfo_schema = new Schema({
       username: { type: String, required: false }, //username
       bio: { type: String, required: false, default: " " }, // bio
       img: { type: String, required: false }, // rasmi base64 qilib saqlash 
-      dob: { type: String, required: false } // rasmi base64 qilib saqlash 
+      dob: { type: String, required: false },// rasmi base64 qilib saqlash 
+      socketID: { type: String, required: false },// rasmi base64 qilib saqlash 
 })
 
 export default mongoose.models['Users'] || mongoose.model('Users', userinfo_schema);

@@ -7,6 +7,7 @@ import UserDetailsForm from './pages/UserDetailFill'
 import Home from './pages/Home'
 import userServices from './service/user.service'
 import RightText from './Components/RightText'
+import { send_socketID, socket } from './utils/socket.io'
 
 export default function App() {
       // user's email
@@ -14,6 +15,9 @@ export default function App() {
       // user's all info
       const [userdata, setuserdata] = useState({})
       const navigate = useNavigate()
+
+
+
 
       // sendToken
       useEffect(() => {
@@ -25,13 +29,14 @@ export default function App() {
 
                         if (response?.status === 200 && response?.info) {
                               setuserdata(response.info)
+                              send_socketID(response.info.email)
                               // navigate('/home')
                         }
                         else {
                               //navigate('/login')
                         }
                   } catch (error) {
-                       // navigate('/login')
+                        // navigate('/login')
                   }
             }
             checkAuth()

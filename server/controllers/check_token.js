@@ -1,3 +1,4 @@
+
 export const check_token = async (req, res) => {
       const { firstName, lastName, email, status, username, bio, img, dob } = req.user;
 
