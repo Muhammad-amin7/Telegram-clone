@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import UserDetailsForm from './pages/UserDetailFill'
 import Home from './pages/Home'
 import userServices from './service/user.service'
+import RightText from './Components/RightText'
 
 export default function App() {
       // user's email
@@ -24,13 +25,13 @@ export default function App() {
 
                         if (response?.status === 200 && response?.info) {
                               setuserdata(response.info)
-                              navigate('/home')
+                              // navigate('/home')
                         }
                         else {
-                              navigate('/login')
+                              //navigate('/login')
                         }
                   } catch (error) {
-                        navigate('/login')
+                       // navigate('/login')
                   }
             }
             checkAuth()
@@ -40,6 +41,7 @@ export default function App() {
             <>
                   <Context.Provider value={{ email, setEmail, userdata }}>
                         <Routes>
+                              <Route path="/Text" element={<RightText />} />
                               <Route path="/login" element={<Login />} />
                               <Route path="/submit_code" element={<SubmitCode />} />
                               <Route path="/user_details_form" element={<UserDetailsForm />} />
