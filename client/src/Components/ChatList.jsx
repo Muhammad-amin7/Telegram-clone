@@ -4,7 +4,7 @@ import ChatItem from './ChatItem';
 
 export default function ChatList({ chats, activeChatId, onChatSelect }) {
     return (
-        <ul className="pt-1">
+        <ul className="pt-1 px-2">
             {chats.map((chat) => (
                 <ChatItem
                     key={chat.id}

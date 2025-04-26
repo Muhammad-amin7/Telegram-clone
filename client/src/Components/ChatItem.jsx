@@ -23,10 +23,11 @@ const Avatar = ({ type = 'initials', value, color = 'bg-blue-500' }) => {
 export default function ChatItem({ chat, isActive, onSelect }) {
     const backgroundClass = isActive ? 'bg-tg-active-bg' : 'hover:bg-tg-hover-bg';
     const previewColorClass = isActive ? 'text-white' : 'text-gray-400';
+    const active = isActive ? 'bg-[#8774e1]' : '';
 
     return (
         <li
-            className={`flex items-center space-x-3 p-2 ${backgroundClass} cursor-pointer mx-1 rounded-lg`}
+            className={`flex items-center space-x-3 p-2 ${backgroundClass} cursor-pointer mx-1 rounded-lg ${active}`}
             onClick={() => onSelect(chat.id)}
         >
             <div className="flex-shrink-0">
@@ -35,7 +36,7 @@ export default function ChatItem({ chat, isActive, onSelect }) {
             <div className="flex-grow min-w-0">
                 <div className="flex justify-between items-center mb-0.5">
                     <span className="font-semibold text-white truncate">{chat.name}</span>
-                    <span className="text-xs text-gray-400 flex-shrink-0 ml-2">{chat.time}</span>
+                    <span className="text-xs text-white flex-shrink-0 ml-2">{chat.time}</span>
                 </div>
                 <div className="flex justify-between items-center">
                     <p className={`text-sm ${previewColorClass} truncate pr-1`}>

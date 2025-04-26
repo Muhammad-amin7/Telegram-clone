@@ -13,9 +13,9 @@ export default function LeftSideBar({ sampleChatData }) {
   };
 
   return (
-    <div className="flex h-screen bg-neutral-800">
+    <div className="flex h-screen">
       {/* Left Side */}
-      <aside className="w-full md:w-[320px] flex flex-col bg-tg-secondary-bg border-r border-gray-700">
+      <aside className="w-full md:w-[370px] flex flex-col bg-tg-secondary-bg bg-neutral-800 backdrop-blur-sm">
         <div className="p-2 flex items-center space-x-2">
           <input type="text" placeholder="Search" className="w-full bg-[rgb(55,55,55)] rounded-full px-4 py-1.5 text-sm text-white placeholder-gray-400 focus:outline-none" />
         </div>

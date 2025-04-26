@@ -1,5 +1,6 @@
 import React from 'react';
 import ChatInput from '../Components/ChatInput';
+import bgimg from "../assets/images/background.png"
 
 const ChatPlaceholderIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-12 h-12 text-gray-400">
@@ -13,7 +14,7 @@ export default function ChatPart({ data }) {
 
 
   return (
-    <main className="flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden relative">
+    <main className={`mainBG flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden relative`}>
       <ChatInput id={data?.id} />
       {hasMessages ? (
         <div className="flex flex-col w-full h-full bg-neutral-600 overflow-y-auto p-4">
@@ -29,8 +30,7 @@ export default function ChatPart({ data }) {
           ))}
         </div>
       ) : (
-        <div className="text-center text-gray-400">
-          <ChatPlaceholderIcon />
+        <div className="text-center text-gray-400 bg-[rgba(200,200,200,0.01)] backdrop-blur-xs px-20 py-10 rounded-2xl">
           <p className="mt-2">Select a chat to start messaging</p>
           <p className="text-sm mt-1">Or use the search bar to find people, groups, or channels.</p>
           <p className="text-sm mt-4 text-tg-accent">Built with React & Tailwind CSS</p>
