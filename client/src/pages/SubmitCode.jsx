@@ -8,6 +8,7 @@ export default function SubmitCode() {
   const { sendCode, data, loading } = useGetInfo();
   const { email } = useContext(Context);
   const navigate = useNavigate();
+
   const [code, setCode] = useState("");
   const [borderState, setBorderState] = useState("neutral");
 
@@ -16,25 +17,19 @@ export default function SubmitCode() {
     if (!email) navigate("/login");
   }, [email, navigate]);
 
-  // Handle response from useGetInfo
-  useEffect(() => {
-    if ( data?.info) {
-      console.log(data);
-    }
-  }, [data]);
 
   // Input change handler
   const handleChange = (e) => {
     setCode(e.target.value);
     setBorderState("neutral"); // reset border on change
   };
-  
+
   // Submit code handler
   const handleSendCode = async (e) => {
     e.preventDefault();
     if (loading || code.length < 4) return;
 
-    const res = await sendCode(code);
+    const res = await sendCode(email, code);
 
     if (res?.info) {
       setBorderState("success");
