@@ -12,10 +12,11 @@ export default function ChatInput({ id }) {
 
       const handleSend = (e) => {
             e.preventDefault()
-            const text = new FormData(e.target).get("message")
+            const text = {}
+            text.text = new FormData(e.target).get("message")
+            text.time = new Date()
             sendChat(text, id)
-
-            console.log(error);
+            console.log(error)
       }
 
       return (

@@ -10,10 +10,7 @@ export const useSendChat = () => {
       const sendChat = async (text, id) => {
             try {
                   const token = localStorage.getItem('token')
-                  const body = {
-                        text: text,
-                        to: id,
-                  }
+                  const body = { ...text, to: id}
                   const response = await userServices.sendChat(body, token)
                   setData(response)
                   console.log(response);
