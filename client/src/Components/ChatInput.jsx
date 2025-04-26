@@ -7,8 +7,10 @@ export default function ChatInput({ id }) {
       const { sendChat, data, loading, error } = useSendChat()
       const { sendID } = useFindChat()
       useEffect(() => {
-            sendID(id)
+            if (id) sendID(id)
       }, [id])
+      console.log(id + " " + "<-id");
+
 
       const handleSend = (e) => {
             e.preventDefault()

@@ -9,6 +9,8 @@ const ChatPlaceholderIcon = () => (
 
 export default function ChatPart({ data }) {
   const hasMessages = data?.send?.length > 0;
+  console.log(data);
+
 
   return (
     <main className="flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden relative">

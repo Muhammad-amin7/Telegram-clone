@@ -1,9 +1,9 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import ChatList from './ChatList';
 import ChatPart from './ChatPart';
 import { useFindChat } from '../hooks/useFindChat';
 
-export default function LeftSideBar({sampleChatData}) {
+export default function LeftSideBar({ sampleChatData }) {
   const [activeChatId, setActiveChatId] = useState(null);
   const { sendID, data, loading, error } = useFindChat();
 
@@ -23,7 +23,7 @@ export default function LeftSideBar({sampleChatData}) {
       </aside>
 
       {/* Right Side */}
-      <ChatPart data={loading ? null : data} />
+      <ChatPart data={sampleChatData.find(item => item.id === activeChatId)} />
     </div>
   );
 }
