@@ -19,7 +19,7 @@ export const useFindChat = () => {
 
                   const response = await userServices.findChat(to, token);
                   setData(response);
-                  console.log(response);
+                  console.log(response)
                   return response;
             } catch (err) {
                   setError(err);
