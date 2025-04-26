@@ -9,13 +9,8 @@
     font-family: 'Roboto', monospace;
 }
 
-<<<<<<< HEAD
 button:hover{
     background-color: rgb(131,120,219,1);
-=======
-button:hover {
-    background-color: rgb(131, 120, 219, 1);
->>>>>>> ce7d35ddfc8ccf26835a155db450c56120fde1da
 }
 
 .telegram-bubble {
