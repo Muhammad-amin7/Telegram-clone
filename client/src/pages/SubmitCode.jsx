@@ -31,15 +31,18 @@ export default function SubmitCode() {
 
     const res = await sendCode(email, code);
 
-    // yengisi
-    if (res.status === 200 && res.info) {
-      navigate('/home')
-    } else if (res.status === 200 && !res.info) {
-      navigate('/user_details_form')
-    }
-    else {
+    if (res.status === 200) {
+      if (res.info && Object.keys(res.info).length > 0) {
+        navigate('/home');
+      } else {
+        navigate('/user_details_form');
+      }
+    } else {
       setBorderState("error");
     }
+    console.log("Server response:", res);
+
+  };
 
   return (
     <section className="h-screen bg-neutral-900 flex items-center justify-center px-4">
