@@ -31,13 +31,15 @@ export default function SubmitCode() {
 
     const res = await sendCode(email, code);
 
-    if (res?.info) {
-      setBorderState("success");
-      navigate("/user_details_form");
-    } else {
+    // yengisi
+    if (res.status === 200 && res.info) {
+      navigate('/home')
+    } else if (res.status === 200 && !res.info) {
+      navigate('/user_details_form')
+    }
+    else {
       setBorderState("error");
     }
-  };
 
   return (
     <section className="h-screen bg-neutral-900 flex items-center justify-center px-4">
