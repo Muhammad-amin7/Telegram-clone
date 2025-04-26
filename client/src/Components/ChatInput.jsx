@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSendChat } from '../hooks/useSendChat';
+import { useFindChat } from '../hooks/useFindChat';
 
 export default function ChatInput({ id }) {
 
       const { sendChat, data, loading, error } = useSendChat()
+      const { sendID } = useFindChat()
+      useEffect(() => {
+            sendID(id)
+      }, [id])
 
       const handleSend = (e) => {
             e.preventDefault()

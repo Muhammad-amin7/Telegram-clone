@@ -33,6 +33,7 @@ export default function SubmitCode() {
 
     if (res.status === 200) {
       if (res.info && Object.keys(res.info).length > 0) {
+        localStorage.setItem('token', res.access_token)
         navigate('/home');
       } else {
         navigate('/user_details_form');
