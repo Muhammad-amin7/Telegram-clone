@@ -17,6 +17,11 @@ export default function SubmitCode() {
     if (!email) navigate("/login");
   }, [email, navigate]);
 
+  useEffect(() => {
+    if (code.length === 6 && !loading) {
+      handleSendCode();
+    }
+  }, [code, loading]);
 
   // Input change handler
   const handleChange = (e) => {
@@ -25,8 +30,7 @@ export default function SubmitCode() {
   };
 
   // Submit code handler
-  const handleSendCode = async (e) => {
-    e.preventDefault();
+    const handleSendCode = async () => {
     if (loading || code.length < 4) return;
 
     const res = await sendCode(email, code);
@@ -52,7 +56,9 @@ export default function SubmitCode() {
         <h1 className="text-4xl max-w-3xl font-semibold">{email}</h1>
         <p className="text-gray-400">We've sent the code to your email</p>
 
-        <form onSubmit={handleSendCode} className="space-y-4 w-full max-w-sm text-start">
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleSendCode();}} className="space-y-4 w-full max-w-sm text-start">
           <div>
             <label className="block text-sm text-gray-300 mb-1 ml-0.5">Code</label>
             <input
@@ -65,15 +71,6 @@ export default function SubmitCode() {
               required
             />
           </div>
-
-          {code.length >= 4 && (
-            <button
-              type="submit"
-              className={`${inputBaseStyle} text-center bg-violet-600 hover:bg-violet-500 active:bg-violet-700 transition-all duration-300 cursor-pointer`}
-            >
-              {loading ? "Loading..." : "Next"}
-            </button>
-          )}
         </form>
       </div>
     </section>
