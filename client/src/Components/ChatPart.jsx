@@ -2,27 +2,42 @@ import React, { useEffect, useRef, useState } from 'react';
 import ChatInput from '../Components/ChatInput';
 import { socket } from '../utils/socket.io';
 
-export default function ChatPart({ data, ChatId ,loading }) {
+export default function ChatPart({ data, ChatId, loading }) {
   const [allMessages, setAllMessages] = useState([]);
   const bottomRef = useRef(null);
 
-  console.log(ChatId);
-  
+  useEffect(() => {
+    setAllMessages([]);
+  }, [ChatId]);
+
   useEffect(() => {
     if (data) {
-      const combined = [...(data.send || []), ...(data.receiver || [])].sort((a, b) => new Date(a.time) - new Date(b.time));
+      const combined = [...(data.send || []), ...(data.receiver || [])]
+        .sort((a, b) => new Date(a.time) - new Date(b.time));
       setAllMessages(combined);
     }
   }, [data]);
 
   useEffect(() => {
-    socket.on('new_message', (msg) => setAllMessages((prev) => [...prev, msg]));
-    return () => socket.off('new_message');
+    const handleNewMessage = (msg) => setAllMessages((prev) => [...prev, msg]);
+    socket.on('new_message', handleNewMessage);
+
+    return () => {
+      socket.off('new_message', handleNewMessage);
+    };
   }, []);
 
-  useEffect(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), [allMessages]);
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [allMessages]);
 
-  if (loading ) return <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative"></main>
+  if (loading) {
+    return (
+      <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden relative">
+        <p className="text-gray-400">Loading chat...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative">
