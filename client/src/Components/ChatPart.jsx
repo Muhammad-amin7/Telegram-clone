@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ChatInput from '../Components/ChatInput';
 import { socket } from '../utils/socket.io';
 
-export default function ChatPart({ data, ChatId }) {
+export default function ChatPart({ data, ChatId ,loading }) {
   const [allMessages, setAllMessages] = useState([]);
   const bottomRef = useRef(null);
 
@@ -21,6 +21,8 @@ export default function ChatPart({ data, ChatId }) {
   }, []);
 
   useEffect(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), [allMessages]);
+
+  if (loading ) return <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative"></main>
 
   return (
     <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative">
