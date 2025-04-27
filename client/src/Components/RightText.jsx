@@ -2,9 +2,8 @@ import React from 'react'
 import { useFindChat } from '../hooks/useFindChat'
 
 export default function RightText() {
-    const { sendID, data, loading,  error} = useFindChat()
-    console.log(data);
-    
+    const { sendID, data, loading, error } = useFindChat()
+
     return (
         <div className="flex flex-col w-full h-[100vh] bg-neutral-600">
             <div className="flex items-center relative m-10">

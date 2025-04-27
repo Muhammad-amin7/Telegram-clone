@@ -12,6 +12,7 @@ export default function ChatInput({ id }) {
 
       useEffect(() => {
             if (id) sendID(id)
+
       }, [id])
 
       const handleSend = (e) => {

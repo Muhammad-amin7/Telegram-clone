@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatList from './ChatList';
 import ChatPart from './ChatPart';
 import { useFindChat } from '../hooks/useFindChat';
@@ -9,8 +9,11 @@ export default function LeftSideBar({ sampleChatData }) {
 
   const handleChatSelect = (chatId) => {
     setActiveChatId(chatId);
-    sendID(chatId);
   };
+
+  useEffect(() => {
+    sendID(activeChatId);
+  }, [activeChatId, data])
 
   return (
     <div className="flex h-screen">
