@@ -1,12 +1,12 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&family=Roboto&display=swap');
 
 
 * {
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family: 'Roboto', monospace;
+    font-family: 'Lora', monospace;
 }
 
 button:hover {
