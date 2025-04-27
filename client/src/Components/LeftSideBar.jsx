@@ -23,7 +23,7 @@ export default function LeftSideBar({ sampleChatData }) {
       </aside>
 
       {/* Right Side */}
-      <ChatPart data={data} ChatId={sampleChatData.find(item => item.id === activeChatId)} />
+      <ChatPart data={data} ChatId={sampleChatData.find(item => item._id === activeChatId)} />
     </div>
   );
 }

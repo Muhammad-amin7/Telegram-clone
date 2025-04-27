@@ -61,6 +61,10 @@ class UserServices {
       async checkUsername(username, token) {
             return this.request(`${this.baseUrl}/user/username/${username}`, 'GET', null, token);
       }
+
+      async getUsers(token) {
+            return this.request(`${this.baseUrl}/users/all`, 'GET', null, token);
+      }
 }
 
 const userServices = new UserServices()

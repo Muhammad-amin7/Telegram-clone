@@ -28,14 +28,14 @@ export default function ChatItem({ chat, isActive, onSelect }) {
     return (
         <li
             className={`flex items-center space-x-3 p-2 ${backgroundClass} cursor-pointer mx-1 rounded-lg ${active}`}
-            onClick={() => onSelect(chat.id)}
+            onClick={() => onSelect(chat._id)}
         >
             <div className="flex-shrink-0">
-                <Avatar type={chat.avatarType} value={chat.avatarValue} color={chat.avatarColor} />
+                <Avatar type={chat.avatarType} value={chat.firstName} color={chat.avatarColor} />
             </div>
             <div className="flex-grow min-w-0">
                 <div className="flex justify-between items-center mb-0.5">
-                    <span className="font-semibold text-white truncate">{chat.name}</span>
+                    <span className="font-semibold text-white truncate">{chat.firstName}</span>
                     <span className="text-xs text-white flex-shrink-0 ml-2">{chat.time}</span>
                 </div>
                 <div className="flex justify-between items-center">

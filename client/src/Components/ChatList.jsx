@@ -7,9 +7,9 @@ export default function ChatList({ chats, activeChatId, onChatSelect }) {
         <ul className="pt-1 px-2">
             {chats.map((chat) => (
                 <ChatItem
-                    key={chat.id}
+                    key={chat._id}
                     chat={chat}
-                    isActive={chat.id === activeChatId}
+                    isActive={chat._id === activeChatId}
                     onSelect={onChatSelect}
                 />
             ))}

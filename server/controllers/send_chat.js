@@ -13,11 +13,11 @@ export const send_chat = async (req, res) => {
                   from: req.user._id,
             });
 
-            const findto = await UserSchema.findById("680a0cf6c5a2553dda5fb6a8")
+            const findto = await UserSchema.findById(to)
 
             if (findto && findto.socketID) {
                   console.log(findto);
-                  
+
                   io.to(findto.socketID).emit('new_message', {
                         from: req.user._id,
                         text,

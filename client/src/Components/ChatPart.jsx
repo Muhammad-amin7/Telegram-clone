@@ -54,7 +54,7 @@ export default function ChatPart({ data, ChatId }) {
       )}
 
       {/* Chat Input (always at bottom) */}
-      <ChatInput id={ChatId?.id} />
+      <ChatInput id={ChatId?._id} />
     </main>
   );
 }
