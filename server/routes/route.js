@@ -19,7 +19,7 @@ router.post("/newuser", checkExistingEmail, newUser)
 router.get("/token", authMiddleware, check_token)
 router.post("/newchat", authMiddleware, send_chat)
 router.get("/chat/:to", authMiddleware, find_chat)
-router.get("/users/all", sendusers)
+router.get("/users/all", authMiddleware, sendusers)
 
 
 export default router
