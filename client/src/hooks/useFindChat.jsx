@@ -15,7 +15,7 @@ export const useFindChat = () => {
 
             try {
                   const token = localStorage.getItem('token')
-                  if (!token) return navigate('login')
+                  if (!token) return navigate('/login')
 
                   const response = await userServices.findChat(to, token);
                   setData(response);

@@ -50,6 +50,7 @@ io.on('connection', (socket) => {
             }
       });
 });
+export { io }
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CONSTANTS =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 const PORT = process.env.PORT || 3333;

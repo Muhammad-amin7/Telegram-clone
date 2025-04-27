@@ -1,29 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatInput from '../Components/ChatInput';
+import { socket } from '../utils/socket.io';
 
-export default function ChatPart({ data , ChatId }) {
-  const messages = data?.send || [];     
-
-  useEffect(()=>{
-    console.log(messages);
-    
-  }, [messages])
-
+export default function ChatPart({ data, ChatId }) {
+  const [messages, setMessages] = useState(data?.send || []);
   const hasMessages = messages.length > 0;
+
+  useEffect(() => {
+    console.log("kirdi");
+
+    socket.on('new_message', (data) => {
+      // Yangi xabarni messages ga qo'shish
+      setMessages(prevMessages => [...prevMessages, data]);
+    });
+
+    return () => {
+      socket.off('new_message');
+    };
+  }, []);
 
   return (
     <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative">
       {/* Chat Area */}
       {hasMessages ? (
-        <div className="flex flex-col w-full h-[70%] z-10 overflow-y-auto p-4">
+        <div className="flex flex-col w-full h-[90%] z-10 overflow-y-auto p-4">
           {messages.map((msg) => (
-            <div key={msg._id} className="flex items-center relative m-4">
-              <svg width="29" height="40" className="h-[20px] w-[10px] absolute left-[-7px] bottom-[-3px]">
+            <div key={msg._id} className="flex items-center relative mt-1">
+              <svg width="29" height="40" className="h-[20px] w-[10px] absolute left-[-7px] bottom-[-2px] scale-x-220">
                 <g fill="none" fillRule="evenodd">
-                  <path d="M3 17h6V0c-.193 2.84-.876 5.767-2.05 8.782-.904 2.325-2.446 4.485-4.625 6.48A1 1 0 003 17z" fill="#000" />
+                  <path d="M3 17h6V0c-.193 2.84-.876 5.767-2.05 8.782-.904 2.325-2.446 4.485-4.625 6.48A1 1 0 003 17z" fill="#212121" />
                 </g>
               </svg>
-              <span className="bg-black text-amber-50 rounded-xl px-4 py-2 max-w-[700px]">{msg.text}</span>
+              <p className="bg-[#212121] text-amber-50 rounded-xl px-4 py-2 max-w-[700px]">
+                {msg.text} <span className='text-[10px]'>{new Date(msg.time).toLocaleTimeString()}</span>
+              </p>
             </div>
           ))}
         </div>

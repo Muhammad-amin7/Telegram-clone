@@ -59,6 +59,12 @@ export default function UserDetailsForm() {
     }
   }, [response]);
 
+  useEffect(() => {
+    if(!email){
+      navigate('/login')
+    }
+  })
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();

@@ -14,8 +14,6 @@ export default function ChatInput({ id }) {
             if (id) sendID(id)
       }, [id])
 
-      console.log(id + " " + "<-id");
-
       const handleSend = (e) => {
             e.preventDefault();
             const text = {
