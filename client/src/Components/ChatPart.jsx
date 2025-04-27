@@ -6,18 +6,26 @@ export default function ChatPart({ data, ChatId }) {
   const [messages, setMessages] = useState(data?.send || []);
   const hasMessages = messages.length > 0;
 
+  // Use effect to set initial data if it's available
+  useEffect(() => {
+    if (data?.send && data.send.length > 0) {
+      setMessages(data.send);
+    }
+  }, [data]);  // Depend on data to re-run when data changes
+
   useEffect(() => {
     console.log("kirdi");
 
+    // Listening for new messages
     socket.on('new_message', (data) => {
-      // Yangi xabarni messages ga qo'shish
+      // Update the state with the new message
       setMessages(prevMessages => [...prevMessages, data]);
     });
 
     return () => {
       socket.off('new_message');
     };
-  }, []);
+  }, []);  // Only run once when the component mounts
 
   return (
     <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative">
