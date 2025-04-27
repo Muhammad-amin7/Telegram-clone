@@ -27,7 +27,7 @@ export default function ChatPart({ data, ChatId }) {
       {allMessages.length ? (
         <div className="flex flex-col w-full h-[90%] z-10 overflow-y-auto p-4">
           {allMessages.map((msg) => (
-            <div key={msg._id} className={`flex items-center mt-1 ${msg?.to === ChatId?._id ? 'justify-start' : 'justify-end'}`}>
+            <div key={msg._id} className={`flex items-center mt-1 ${msg?.to === ChatId?._id ? 'justify-end' : 'justify-start'}`}>
               <p className={`rounded-xl px-4 py-2 max-w-[700px] ${msg?.to === ChatId?._id ? 'bg-amber-200 text-black' : 'bg-[#212121] text-amber-50'}`}>
                 {msg.text} <span className="text-[10px]">{new Date(msg.time).toLocaleTimeString()}</span>
               </p>
