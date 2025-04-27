@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ChatInput from '../Components/ChatInput';
 
+export default function ChatPart({ data , ChatId }) {
+  const messages = data?.send || [];     
 
-export default function ChatPart({ data }) {
-  const hasMessages = data?.send?.length > 0;
-  console.log(data);
+  useEffect(()=>{
+    console.log(messages);
+    
+  }, [messages])
 
+  const hasMessages = messages.length > 0;
 
   return (
-    <main className={`mainBG flex-grow bg-tg-bg flex flex-col items-center justify-center p-4 overflow-hidden relative`}>
-      <ChatInput id={data?.id} />
+    <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative">
+      {/* Chat Area */}
       {hasMessages ? (
-        <div className="flex flex-col w-full h-full bg-neutral-600 overflow-y-auto p-4">
-          {data.send.map((msg) => (
+        <div className="flex flex-col w-full h-full z-10 overflow-y-auto p-4">
+          {messages.map((msg) => (
             <div key={msg._id} className="flex items-center relative m-4">
               <svg width="29" height="40" className="h-[20px] w-[10px] absolute left-[-7px] bottom-[-3px]">
                 <g fill="none" fillRule="evenodd">
@@ -24,12 +28,15 @@ export default function ChatPart({ data }) {
           ))}
         </div>
       ) : (
-        <div className="text-center text-gray-400 bg-[rgba(200,200,200,0.01)] backdrop-blur-xs px-20 py-10 rounded-2xl">
+        <div className="flex flex-col justify-center items-center text-center text-gray-400 bg-[rgba(200,200,200,0.01)] backdrop-blur-sm px-20 py-10 rounded-2xl w-full h-full">
           <p className="mt-2">Select a chat to start messaging</p>
           <p className="text-sm mt-1">Or use the search bar to find people, groups, or channels.</p>
           <p className="text-sm mt-4 text-tg-accent">Built with React & Tailwind CSS</p>
         </div>
       )}
+
+      {/* Chat Input (always at bottom) */}
+      <ChatInput id={ChatId?.id} />
     </main>
   );
 }
