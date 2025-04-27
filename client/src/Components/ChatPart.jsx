@@ -15,7 +15,7 @@ export default function ChatPart({ data , ChatId }) {
     <main className="mainBG flex-grow bg-tg-bg flex flex-col items-center justify-between p-4 overflow-hidden relative">
       {/* Chat Area */}
       {hasMessages ? (
-        <div className="flex flex-col w-full h-[70%] z-10 overflow-y-auto p-4">
+        <div className="flex flex-col w-full h-[80%] z-10 overflow-y-auto p-4">
           {messages.map((msg) => (
             <div key={msg._id} className="flex items-center relative m-4">
               <svg width="29" height="40" className="h-[20px] w-[10px] absolute left-[-7px] bottom-[-3px]">
