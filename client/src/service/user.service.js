@@ -57,6 +57,10 @@ class UserServices {
       async findChat(to, token) {
             return this.request(`${this.baseUrl}/chat/${to}`, 'GET', null, token);
       }
+
+      async checkUsername(username, token) {
+            return this.request(`${this.baseUrl}/user/username/${username}`, 'GET', null, token);
+      }
 }
 
 const userServices = new UserServices()

@@ -5,7 +5,7 @@ const userinfo_schema = new Schema({
       lastName: { type: String, required: false }, // familyasi
       email: { type: String, required: true }, //nomerdan kegin email sorasin 
       status: { type: Boolean, required: true, default: false }, // online yoki ofline
-      username: { type: String, required: false }, //username
+      username: { type: String, required: false, unique: true }, //username
       bio: { type: String, required: false, default: " " }, // bio
       img: { type: String, required: false }, // rasmi base64 qilib saqlash 
       dob: { type: String, required: false },// rasmi base64 qilib saqlash 

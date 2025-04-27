@@ -7,11 +7,13 @@ import { check_token } from "../controllers/check_token.js"
 import { authMiddleware } from "../middlewares/authUser.js"
 import { send_chat } from "../controllers/send_chat.js"
 import { find_chat } from "../controllers/find_chat.js"
+import { checkUsername } from "../controllers/check_username.js"
 
 const router = Router()
 
 router.post("/user", sendCode)
 router.post("/user/code", checkCode)
+router.get("/user/username/:username", checkUsername)
 router.post("/newuser", checkExistingEmail, newUser)
 router.get("/token", authMiddleware, check_token)
 router.post("/newchat", authMiddleware, send_chat)

@@ -1,95 +1,66 @@
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( express.js )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-import express from 'express'
-const app = express();
-app.use(express.json())
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= IMPORTS =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import http from 'http';
+import { Server } from 'socket.io';
 
-
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( cors )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-import cors from 'cors'
-app.use(cors())
-
-
-
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( env )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-import dotenv from 'dotenv'
-dotenv.config()
-
-
-
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( imports )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 import { portPassword } from './middlewares/Password.middlewares.js';
 import router from './routes/route.js';
 import { connectDB } from './config/connectDatebaze.js';
-import "./utils/cronCode.js"
-import http from 'http'
-
-
-
-
-
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( socket.io )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-import { Server } from 'socket.io';
 import UserSchema from './schema/User.schema.js';
-const server = http.createServer(app)
+import './utils/cronCode.js';
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= INITIALIZE APP =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+dotenv.config();
+
+const app = express();
+const server = http.createServer(app);
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= SOCKET.IO SETUP =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 const io = new Server(server, {
       cors: {
-            origin: "*",
-            methods: '*'
-      }
-})
+            origin: '*',
+            methods: '*',
+      },
+});
 
-io.on('connection', async (so) => {
-      so.on('isOnline', async (data) => {
-            await UserSchema.findOneAndUpdate({ email: data.email }, { socketID: data.id })
-            console.log(data);
+io.on('connection', (socket) => {
+      console.log('⚡ A user connected:', socket.id);
 
-      })
+      socket.on('isOnline', async (data) => {
+            try {
+                  await UserSchema.findOneAndUpdate({ email: data.email }, { socketID: socket.id });
+                  console.log('User online:', data);
+            } catch (error) {
+                  console.error('Error updating user socketID:', error);
+            }
+      });
 
-      so.on('disconnect', async () => {
-            await UserSchema.findOneAndUpdate({ socket_id: so.id }, { socket_id: null })
-      })
-})
+      socket.on('disconnect', async () => {
+            try {
+                  await UserSchema.findOneAndUpdate({ socketID: socket.id }, { socketID: null });
+                  console.log('User disconnected:', socket.id);
+            } catch (error) {
+                  console.error('Error clearing socketID:', error);
+            }
+      });
+});
 
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CONSTANTS =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+const PORT = process.env.PORT || 3333;
 
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= DATABASE CONNECTION =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+connectDB();
 
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( constants )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ROUTES =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+app.use('/', portPassword, router);
 
-const PORT = process.env.PORT || 3333
-
-
-
-
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( connect date baze )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-connectDB()
-
-
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( code start )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-app.use(`/`, portPassword, router)
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( routes )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// app.use(`/`, portPassword, router)
-
-
-
-
-
-
-
-
-
-//  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-((( server port )))-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-server.listen(PORT, console.log(`✅ Server successfully working\n📡 Port:${PORT}\n`))
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= START SERVER =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+server.listen(PORT, () => {
+      console.log(`✅ Server running successfully\n📡 Listening on port: ${PORT}\n`);
+});
