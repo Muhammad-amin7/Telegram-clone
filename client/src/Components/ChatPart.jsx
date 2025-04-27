@@ -1,12 +1,6 @@
 import React from 'react';
 import ChatInput from '../Components/ChatInput';
-import bgimg from "../assets/images/background.png"
 
-const ChatPlaceholderIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-12 h-12 text-gray-400">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-  </svg>
-);
 
 export default function ChatPart({ data }) {
   const hasMessages = data?.send?.length > 0;
