@@ -13,7 +13,7 @@ export default function LeftSideBar({ sampleChatData }) {
 
   useEffect(() => {
     sendID(activeChatId);
-  }, [activeChatId])
+  }, [activeChatId, data])
 
   return (
     <div className="flex h-screen">
