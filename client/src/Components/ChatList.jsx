@@ -3,6 +3,7 @@ import React from 'react';
 import ChatItem from './ChatItem';
 
 export default function ChatList({ chats, activeChatId, onChatSelect }) {
+    console.log(chats)
     return (
         <ul className="pt-1 px-2">
             {chats.map((chat) => (

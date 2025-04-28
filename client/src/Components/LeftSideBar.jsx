@@ -7,9 +7,9 @@ import LeftUserSearch from './LeftUserSearch';
 export default function LeftSideBar({ sampleChatData }) {
   const [activeChatId, setActiveChatId] = useState(null);
   const { sendID, data, loading, error } = useFindChat();
-
   const [refreshTrigger, setRefreshTrigger] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState(""); //  search input uchun yangi state 
 
   const handleChatSelect = (chatId) => {
     setActiveChatId(chatId);
@@ -20,20 +20,22 @@ export default function LeftSideBar({ sampleChatData }) {
       sendID(activeChatId);
     }
   }, [activeChatId, refreshTrigger]);
-  
+
+  const filteredChats = sampleChatData.filter(chat =>
+    chat.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="flex h-screen">
       {/* Left Side */}
       <aside className="w-full md:w-[370px] flex flex-col bg-tg-secondary-bg bg-neutral-800 backdrop-blur-sm">
 
-        <LeftUserSearch/>
+        <LeftUserSearch onSearch={setSearchQuery} /> 
 
-        <ChatList chats={sampleChatData} activeChatId={activeChatId} onChatSelect={handleChatSelect} />
+        <ChatList chats={filteredChats} activeChatId={activeChatId} onChatSelect={handleChatSelect} />
       </aside>
 
       {/* Right Side */}
-
       <ChatPart 
         data={data} 
         ChatId={sampleChatData.find(item => item._id === activeChatId)} 
