@@ -1,4 +1,4 @@
-import UserSchema from "../schema/User.schema"
+import UserSchema from "../schema/User.schema.js"
 
 export const addfriends = async (req, res) => {
       const id = req.user._id
