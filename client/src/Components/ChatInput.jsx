@@ -3,7 +3,7 @@ import { useSendChat } from '../hooks/useSendChat';
 import { useFindChat } from '../hooks/useFindChat';
 import { IoIosSend } from "react-icons/io";
 
-export default function ChatInput({ id }) {
+export default function ChatInput({ id, setRefreshTrigger }) {
 
       const { sendChat, error } = useSendChat()
       const { sendID } = useFindChat()
@@ -15,17 +15,19 @@ export default function ChatInput({ id }) {
 
       }, [id])
 
-      const handleSend = (e) => {
+      const handleSend = async (e) => {
             e.preventDefault();
             const text = {
-                  text: message,
-                  time: new Date()
+              text: message,
+              time: new Date()
             };
-
-            sendChat(text, id);
-            console.log(error);
+          
+            await sendChat(text, id); // make sure you await sending
+          
+            setRefreshTrigger(prev => !prev); // flip refreshTrigger to cause refetch
             setMessage("");
-      };
+          };
+          
 
       return (
             <section className='absolute bottom-[40px] left-50% w-[80%] z-20'>
