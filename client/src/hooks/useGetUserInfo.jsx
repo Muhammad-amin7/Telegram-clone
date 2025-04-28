@@ -13,10 +13,10 @@ export const useGetInfo = () => {
             try {
               const response = await userServices.getUserInfo(email, code);
               setData(response);
-              return response; // ✅ Return response here
+              return response; 
             } catch (err) {
               setError(err);
-              return null; // or return err if you prefer
+              return null; 
             } finally {
               setLoading(false);
             }

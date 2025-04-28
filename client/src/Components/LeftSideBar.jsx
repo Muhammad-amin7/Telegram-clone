@@ -3,13 +3,15 @@ import ChatList from './ChatList';
 import ChatPart from './ChatPart';
 import { useFindChat } from '../hooks/useFindChat';
 import LeftUserSearch from './LeftUserSearch';
+import { useSearchUserName } from '../hooks/useSearchUserName';
 
-export default function LeftSideBar({ sampleChatData }) {
+export default function LeftSideBar({ sampleChatData = [] }) {
   const [activeChatId, setActiveChatId] = useState(null);
-  const { sendID, data, loading, error } = useFindChat();
   const [refreshTrigger, setRefreshTrigger] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const [searchQuery, setSearchQuery] = useState(""); //  search input uchun yangi state 
+  const { sendID, data } = useFindChat();
+  const { sendUserName, users, loading: searchLoading } = useSearchUserName();
 
   const handleChatSelect = (chatId) => {
     setActiveChatId(chatId);
@@ -19,26 +21,30 @@ export default function LeftSideBar({ sampleChatData }) {
     if (activeChatId) {
       sendID(activeChatId);
     }
-  }, [activeChatId, refreshTrigger]);
+  }, [activeChatId, refreshTrigger, sendID]);
 
-  const filteredChats = sampleChatData.filter(chat =>
-    chat.firstName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    if (searchQuery.trim() !== '') {
+      sendUserName(searchQuery.trim()); // send pure string!
+    }
+  }, [searchQuery, sendUserName]);
+  
+
+  // Decide whether to show search results or default chat data
+  const displayChats = searchQuery.trim() ? users : sampleChatData;
 
   return (
     <div className="flex h-screen">
-      {/* Left Side */}
+      {/* Left Sidebar */}
       <aside className="w-full md:w-[370px] flex flex-col bg-tg-secondary-bg bg-neutral-800 backdrop-blur-sm">
-
-        <LeftUserSearch onSearch={setSearchQuery} /> 
-
-        <ChatList chats={filteredChats} activeChatId={activeChatId} onChatSelect={handleChatSelect} />
+        <LeftUserSearch onSearch={setSearchQuery} />
+        <ChatList chats={displayChats} activeChatId={activeChatId} onChatSelect={handleChatSelect} loading={searchLoading} />
       </aside>
 
-      {/* Right Side */}
-      <ChatPart 
-        data={data} 
-        ChatId={sampleChatData.find(item => item._id === activeChatId)} 
+      {/* Right Chat Area */}
+      <ChatPart
+        data={data}
+        ChatId={(sampleChatData || []).find(item => item._id === activeChatId)}
         setRefreshTrigger={setRefreshTrigger}
       />
     </div>
