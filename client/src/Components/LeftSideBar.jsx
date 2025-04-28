@@ -2,32 +2,43 @@ import React, { useEffect, useState } from 'react';
 import ChatList from './ChatList';
 import ChatPart from './ChatPart';
 import { useFindChat } from '../hooks/useFindChat';
+import LeftUserSearch from './LeftUserSearch';
 
 export default function LeftSideBar({ sampleChatData }) {
   const [activeChatId, setActiveChatId] = useState(null);
   const { sendID, data, loading, error } = useFindChat();
+
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
+
 
   const handleChatSelect = (chatId) => {
     setActiveChatId(chatId);
   };
 
   useEffect(() => {
-    sendID(activeChatId);
-  }, [activeChatId, data])
+    if (activeChatId) {
+      sendID(activeChatId);
+    }
+  }, [activeChatId, refreshTrigger]);
+  
 
   return (
     <div className="flex h-screen">
       {/* Left Side */}
       <aside className="w-full md:w-[370px] flex flex-col bg-tg-secondary-bg bg-neutral-800 backdrop-blur-sm">
-        <div className="p-2 flex items-center space-x-2">
-          <input type="text" placeholder="Search" className="w-full bg-[rgb(55,55,55)] rounded-full px-4 py-1.5 text-sm text-white placeholder-gray-400 focus:outline-none" />
-        </div>
+
+        <LeftUserSearch/>
+
         <ChatList chats={sampleChatData} activeChatId={activeChatId} onChatSelect={handleChatSelect} />
       </aside>
 
       {/* Right Side */}
 
-      <ChatPart data={data} ChatId={sampleChatData.find(item => item._id === activeChatId)} />
+      <ChatPart 
+        data={data} 
+        ChatId={sampleChatData.find(item => item._id === activeChatId)} 
+        setRefreshTrigger={setRefreshTrigger}
+      />
     </div>
   );
 }

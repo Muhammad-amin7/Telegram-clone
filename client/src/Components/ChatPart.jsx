@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ChatInput from '../Components/ChatInput';
 import { socket } from '../utils/socket.io';
 
-export default function ChatPart({ data, ChatId, loading }) {
+export default function ChatPart({ data, ChatId, loading, setRefreshTrigger }) {
   const [allMessages, setAllMessages] = useState([]);
   const bottomRef = useRef(null);
 
@@ -59,7 +59,7 @@ export default function ChatPart({ data, ChatId, loading }) {
           <p className="text-sm mt-4 text-tg-accent">Built with React & Tailwind CSS</p>
         </div>
       )}
-      <ChatInput id={ChatId?._id} />
+      <ChatInput id={ChatId?._id} setRefreshTrigger={setRefreshTrigger} />
     </main>
   );
 }
