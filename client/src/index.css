@@ -40,3 +40,13 @@ button:hover {
 .mainBG {
     background: url('./assets/images/background.png') no-repeat center / cover;
 }
+
+.mainBG ::-webkit-scrollbar {
+    width: 2px;
+    background-color: #464646;
+}
+
+.mainBG ::-webkit-scrollbar-thumb {
+    width: 1px;
+    background-color: white;
+}
