@@ -27,7 +27,7 @@ export default function LeftSideBar({ sampleChatData }) {
 
       {/* Right Side */}
 
-      <ChatPart data={data} loading={loading} ChatId={sampleChatData.find(item => item._id === activeChatId)} />
+      <ChatPart data={data} ChatId={sampleChatData.find(item => item._id === activeChatId)} />
     </div>
   );
 }
