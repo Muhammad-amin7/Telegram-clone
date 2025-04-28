@@ -9,6 +9,7 @@ import { send_chat } from "../controllers/send_chat.js"
 import { find_chat } from "../controllers/find_chat.js"
 import { checkUsername } from "../controllers/check_username.js"
 import { sendusers } from "../controllers/send_users.js"
+import { searchuser } from "../controllers/search_user.js"
 
 const router = Router()
 
@@ -20,6 +21,7 @@ router.get("/token", authMiddleware, check_token)
 router.post("/newchat", authMiddleware, send_chat)
 router.get("/chat/:to", authMiddleware, find_chat)
 router.get("/users/all", authMiddleware, sendusers)
+router.get("/users/find/:value", searchuser)
 
 
 export default router
