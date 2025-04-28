@@ -13,7 +13,10 @@ export const useSearchUserName = () => {
     setError(null);
 
     try {
-      const response = await userServices.searchUserName(username);
+      const token = localStorage.getItem('token')
+      if (!token) return navigate('/login')
+
+      const response = await userServices.searchUserName(username, token);
       setUsers(response.users || []);
 
     } catch (err) {

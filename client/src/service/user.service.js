@@ -74,8 +74,8 @@ class UserServices {
             return this.request(`${this.baseUrl}/users/friends`, 'GET', null, token);
       }
 
-      async searchUserName(username) {
-            return this.request(`${this.baseUrl}/users/find/${username}`, 'GET', null);
+      async searchUserName(username, token) {
+            return this.request(`${this.baseUrl}/users/find/${username}`, 'GET', null, token);
       }
 
 }
