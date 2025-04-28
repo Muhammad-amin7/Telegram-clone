@@ -1,7 +1,8 @@
 import UserSchema from "../schema/User.schema.js";
 
 export const searchuser = async (req, res) => {
-  const value = req.params.value?.trim(); 
+  const value = req.params.value?.trim();
+  const thisuser = req.user._id; 
 
   if (!value || value.length === 0) {
     return res.status(400).send({ status: 400, message: 'Ma\'lumot bo\'sh' });
@@ -15,8 +16,10 @@ export const searchuser = async (req, res) => {
       ]
     });
 
-    return res.status(200).send({ status: 200, users: usersarray });
-    
+    const filteredUsers = usersarray.filter(user => user._id.toString() !== thisuser.toString());
+
+    return res.status(200).send({ status: 200, users: filteredUsers });
+
   } catch (error) {
     console.error('Qidirishda xatolik:', error);
     return res.status(500).send({ status: 500, message: 'Server xatolik yuz berdi' });

@@ -1,7 +1,7 @@
 import UserSchema from "../schema/User.schema.js";
 
 export const sendusers = async (req, res) => {
-      const id = req.user._id;
+      const id = req.user._id
 
       try {
             const friendsid = await UserSchema.findById(id);

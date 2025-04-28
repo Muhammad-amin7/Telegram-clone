@@ -10,6 +10,7 @@ import { find_chat } from "../controllers/find_chat.js"
 import { checkUsername } from "../controllers/check_username.js"
 import { sendusers } from "../controllers/send_users.js"
 import { searchuser } from "../controllers/search_user.js"
+import { addfriends } from "../controllers/add_friends.js"
 
 const router = Router()
 
@@ -21,7 +22,8 @@ router.get("/token", authMiddleware, check_token)
 router.post("/newchat", authMiddleware, send_chat)
 router.get("/chat/:to", authMiddleware, find_chat)
 router.get("/users/friends", authMiddleware, sendusers)
-router.get("/users/find/:value", searchuser)
+router.get("/users/friends/add/:to", authMiddleware, addfriends)
+router.get("/users/find/:value", authMiddleware, searchuser)
 
 
 export default router
