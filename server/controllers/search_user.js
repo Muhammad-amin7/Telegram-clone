@@ -1,7 +1,7 @@
 import UserSchema from "../schema/User.schema.js";
 
 export const searchuser = async (req, res) => {
-  const value = req.params.value?.trim(); // Trim qildik
+  const value = req.params.value?.trim(); 
 
   if (!value || value.length === 0) {
     return res.status(400).send({ status: 400, message: 'Ma\'lumot bo\'sh' });

@@ -27,8 +27,8 @@ export default function LeftSideBar({ sampleChatData = [] }) {
     if (searchQuery.trim() !== '') {
       sendUserName(searchQuery.trim()); // send pure string!
     }
-  }, [searchQuery, sendUserName]);
-  
+  }, [searchQuery]);
+
 
   // Decide whether to show search results or default chat data
   const displayChats = searchQuery.trim() ? users : sampleChatData;

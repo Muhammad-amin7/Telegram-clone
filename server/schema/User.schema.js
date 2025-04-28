@@ -10,6 +10,7 @@ const userinfo_schema = new Schema({
       img: { type: String, required: false }, // rasmi base64 qilib saqlash 
       dob: { type: String, required: false },// rasmi base64 qilib saqlash 
       socketID: { type: String, required: false },// rasmi base64 qilib saqlash 
+      friends: [{ type: Schema.Types.ObjectId, ref: 'Users' }]
 })
 
 export default mongoose.models['Users'] || mongoose.model('Users', userinfo_schema);

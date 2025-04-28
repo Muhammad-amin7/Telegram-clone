@@ -15,6 +15,8 @@ export const useSearchUserName = () => {
     try {
       const response = await userServices.searchUserName(username);
       setUsers(response || []);
+      console.log(response);
+
     } catch (err) {
       setError(err);
     } finally {

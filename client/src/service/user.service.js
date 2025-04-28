@@ -6,37 +6,37 @@ class UserServices {
 
       async request(url, method = "GET", body, authToken) {
             const headers = {
-              "Content-Type": "application/json",
-              "Accept": "application/json",
-              "x-access-password": this.password
+                  "Content-Type": "application/json",
+                  "Accept": "application/json",
+                  "x-access-password": this.password
             };
-          
+
             if (authToken) {
-              headers['Authorization'] = `Bearer ${authToken}`;
+                  headers['Authorization'] = `Bearer ${authToken}`;
             }
-          
+
             const options = { method, headers };
-          
+
             if (body) {
-              options.body = JSON.stringify(body);
+                  options.body = JSON.stringify(body);
             }
-          
+
             try {
-              const response = await fetch(url, options);
-          
-              if (!response.ok) {
-                const text = await response.text(); // safely try read
-                console.error(`Server Error ${response.status}: ${text}`);
-                throw new Error(`Server Error: ${response.status}`);
-              }
-          
-              return await response.json();
+                  const response = await fetch(url, options);
+
+                  if (!response.ok) {
+                        const text = await response.text(); // safely try read
+                        console.error(`Server Error ${response.status}: ${text}`);
+                        throw new Error(`Server Error: ${response.status}`);
+                  }
+
+                  return await response.json();
             } catch (error) {
-              console.error("Request failed:", error);
-              throw error;
+                  console.error("Request failed:", error);
+                  throw error;
             }
-          }
-          
+      }
+
       async sendEmail(email) {
             if (!email || typeof email !== 'string' || !email.includes('@')) {
                   throw new Error("Invalid email address");
@@ -75,7 +75,7 @@ class UserServices {
       }
 
       async searchUserName(username) {
-            return this.request(`${this.baseUrl}/user/find/${username}`, 'GET', null);
+            return this.request(`${this.baseUrl}/users/find/${username}`, 'GET', null);
       }
 
 }
