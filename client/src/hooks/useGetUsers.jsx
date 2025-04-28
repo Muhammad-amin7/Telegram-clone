@@ -19,11 +19,7 @@ export const useFindChat = () => {
                         if (!token) return navigate('/login'); // Redirect if no token found
 
                         const response = await userServices.getUsers(token);
-                        if (response.status === 200) {
-                              setData(response.users);
-                        } else {
-                              setError("Failed to fetch users");
-                        }
+                        setData(response);
                   } catch (err) {
                         setError("Error fetching users");
                         console.error(err);

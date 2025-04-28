@@ -2,10 +2,17 @@ import UserSchema from "../schema/User.schema.js";
 
 export const sendusers = async (req, res) => {
       const id = req.user._id;
+
       try {
-            const allusers = await UserSchema.find();
-            const filteredUsers = allusers.filter(user => user._id.toString() !== id.toString()); // Exclude the user with the same id
-            res.status(200).send({ status: 200, users: filteredUsers });
+            const friendsid = await UserSchema.findById(id);
+
+            if (!friendsid || !friendsid.friends || friendsid.friends.length === 0) {
+                  return res.send([]);
+            }
+
+            const friends = await UserSchema.find({ _id: { $in: friendsid.friends } });
+
+            res.send(friends);
 
       } catch (error) {
             console.error(error);
