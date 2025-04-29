@@ -7,7 +7,6 @@ export const useSearchClicked = () => {
   const [error, setError] = useState(null);
 
   const sendUserClicked = async (userId) => { // just a string now
-    if (!userId) return;
 
     setLoading(true);
     setError(null);
@@ -17,9 +16,11 @@ export const useSearchClicked = () => {
       if (!token) return navigate('/login')
 
       const response = await userServices.searchClicked(userId, token);
+
       setUser(response);
-      console.log(user);      
-      
+      console.log(response);      
+      console.log(userId);      
+
     } catch (err) {
       setError(err);
       console.log(err);

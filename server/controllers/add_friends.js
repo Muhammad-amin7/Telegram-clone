@@ -2,7 +2,7 @@ import UserSchema from "../schema/User.schema.js"
 
 export const addfriends = async (req, res) => {
       const id = req.user._id
-      const friend = req.params.to
+      const friend = req.params.friend
 
       try {
             const thisuser = await UserSchema.findById(id)

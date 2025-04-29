@@ -13,8 +13,6 @@ const Avatar = ({ type = 'initials', value, color = 'bg-blue-500' }) => {
     );
   }
 
-  
-
   const initials = typeof value === 'string' ? value.substring(0, 2).toUpperCase() : '??';
   return (
     <div className={`w-12 h-12 rounded-full ${color} flex items-center justify-center text-xl font-semibold text-white`}>
@@ -30,7 +28,6 @@ export default function ChatSearchItem({ chat, isActive, onSelect, onAddFriend }
     <li
       className={`flex items-center justify-between space-x-3 p-2 ${backgroundClass} cursor-pointer mx-1 rounded-lg`}
     >
-      {/* Left side - Avatar + Name */}
       <div className="flex items-center space-x-3" onClick={() => onSelect(chat._id)}>
         <div className="flex-shrink-0">
           <Avatar type={chat.avatarType} value={chat.firstName} color={chat.avatarColor} />

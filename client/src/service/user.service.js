@@ -80,7 +80,7 @@ class UserServices {
 
       
       async searchClicked(userId, token) {
-            return this.request(`${this.baseUrl}/users/find/${userId}`, 'GET', null, token);
+            return this.request(`${this.baseUrl}/users/friends/add/${userId}`, 'GET', null, token);
       }
 
 }
