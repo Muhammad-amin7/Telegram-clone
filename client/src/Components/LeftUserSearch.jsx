@@ -6,7 +6,7 @@ export default function LeftUserSearch({ onSearch }) {
       <input
         type="text"
         onChange={(e) => onSearch(e.target.value)}
-        placeholder="Search"
+        placeholder="Search by username or email"
         className="w-full bg-[rgb(55,55,55)] rounded-full px-4 py-1.5 text-sm text-white placeholder-gray-400 focus:outline-none"
       />
     </div>
