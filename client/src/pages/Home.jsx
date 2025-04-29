@@ -6,7 +6,6 @@ export default function Home() {
   // const [user, setUsers] = useState([])
 
   const { data } = useFindChat()
-  console.log(data);
 
   return (
     <div>
