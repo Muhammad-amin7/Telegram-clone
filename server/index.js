@@ -35,7 +35,6 @@ io.on('connection', (socket) => {
       socket.on('isOnline', async (data) => {
             try {
                   await UserSchema.findOneAndUpdate({ email: data.email }, { socketID: socket.id });
-                  console.log('User online:', data);
             } catch (error) {
                   console.error('Error updating user socketID:', error);
             }
