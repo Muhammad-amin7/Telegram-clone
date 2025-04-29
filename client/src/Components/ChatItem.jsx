@@ -1,41 +1,66 @@
-// src/components/ChatItem.jsx
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 
-const Avatar = ({ type = 'initials', value, color = 'bg-blue-500' }) => {
-    if (type === 'image' && value) {
+// Ranglar ro'yxati
+const COLORS = [
+    'bg-red-500', 'bg-green-500', 'bg-blue-500', 'bg-yellow-500',
+    'bg-pink-500', 'bg-purple-500', 'bg-indigo-500', 'bg-teal-500', 'bg-orange-500'
+];
+
+// Random rang tanlash
+const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * COLORS.length);
+    return COLORS[randomIndex];
+};
+
+// Avatar komponenti
+const Avatar = ({ imgSrc, firstName = '', lastName = '' }) => {
+    const randomColor = useMemo(() => getRandomColor(), []);
+    const [imgError, setImgError] = useState(false);
+
+    const initials = `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase();
+
+    if (imgSrc && !imgError) {
         return (
             <img
-                className="w-12 h-12 rounded-full object-cover bg-gray-700"
-                src={value}
+                src={imgSrc}
                 alt="User Avatar"
+                className="w-12 h-12 rounded-full object-cover bg-gray-700"
                 loading="lazy"
+                onError={() => setImgError(true)}
             />
         );
     }
-    const initials = typeof value === 'string' ? value.substring(0, 2).toUpperCase() : '??';
+
     return (
-        <div className={`w-12 h-12 rounded-full ${color} flex items-center justify-center text-xl font-semibold text-white`}>
-            {initials}
+        <div className={`w-12 h-12 rounded-full ${randomColor} flex items-center justify-center text-xl font-semibold text-white`}>
+            {initials || '??'}
         </div>
     );
 };
 
-export default function ChatItem({ chat, isActive, onSelect }) {
+// ChatItem komponenti
+const ChatItem = ({ chat, isActive, onSelect }) => {
     const backgroundClass = isActive ? 'bg-tg-active-bg' : 'hover:bg-tg-hover-bg';
     const previewColorClass = isActive ? 'text-white' : 'text-gray-400';
-    const active = isActive ? 'bg-[#8774e1]' : '';
+    const activeClass = isActive ? 'bg-[#8774e1]' : '';
 
     return (
         <li
-            className={`flex items-center space-x-3 p-2 ${backgroundClass} cursor-pointer mx-1 rounded-lg ${active}`}
+            className={`flex items-center space-x-3 p-2 ${backgroundClass} ${activeClass} cursor-pointer mx-1 rounded-lg`}
             onClick={() => onSelect(chat._id)}
         >
             <div className="flex-shrink-0">
-                <Avatar type={chat.avatarType} value={chat.firstName} color={chat.avatarColor} />
+                <Avatar
+                    imgSrc={chat.img}
+                    firstName={chat.firstName}
+                    lastName={chat.lastName}
+                />
             </div>
             <div className="flex-grow min-w-0">
                 <div className="flex justify-between items-center mb-0.5">
-                    <span className="font-semibold text-white truncate">{chat.firstName}</span>
+                    <span className="font-semibold text-white truncate">
+                        {chat.lastName} {chat.firstName}
+                    </span>
                     <span className="text-xs text-white flex-shrink-0 ml-2">{chat.time}</span>
                 </div>
                 <div className="flex justify-between items-center">
@@ -51,4 +76,6 @@ export default function ChatItem({ chat, isActive, onSelect }) {
             </div>
         </li>
     );
-}
+};
+
+export default ChatItem;
