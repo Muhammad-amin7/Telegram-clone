@@ -23,6 +23,9 @@ const Avatar = ({ type = 'initials', value, color = 'bg-blue-500' }) => {
 
 export default function ChatSearchItem({ chat, isActive, onSelect, onAddFriend }) {
   const backgroundClass = isActive ? 'bg-tg-active-bg' : 'hover:bg-tg-hover-bg';
+  console.log(chat);
+  console.log('Salom');
+  
   
   return (
     <li

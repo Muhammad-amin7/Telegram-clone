@@ -9,31 +9,23 @@ class UserServices {
                   "Content-Type": "application/json",
                   "Accept": "application/json",
                   "x-access-password": this.password
-            };
 
+            }
             if (authToken) {
-                  headers['Authorization'] = `Bearer ${authToken}`;
+                  headers['Authorization'] = `Bearer ${authToken}`
             }
 
-            const options = { method, headers };
+            const options = { method, headers }
 
             if (body) {
-                  options.body = JSON.stringify(body);
+                  options.body = JSON.stringify(body)
             }
 
             try {
-                  const response = await fetch(url, options);
-
-                  if (!response.ok) {
-                        const text = await response.text(); // safely try read
-                        console.error(`Server Error ${response.status}: ${text}`);
-                        throw new Error(`Server Error: ${response.status}`);
-                  }
-
-                  return await response.json();
+                  const response = await fetch(url, options)
+                  return await response.json()
             } catch (error) {
-                  console.error("Request failed:", error);
-                  throw error;
+                  console.log(error)
             }
       }
 

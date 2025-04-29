@@ -35,6 +35,9 @@ export default function LeftSideBar({ sampleChatData = [] }) {
   // Decide whether to show search results or default chat data
   const displayChats = searchQuery.trim() ? users : sampleChatData;
 
+  console.log(displayChats);
+  
+
   return (
     <div className="flex h-screen">
       {/* Left Sidebar */}

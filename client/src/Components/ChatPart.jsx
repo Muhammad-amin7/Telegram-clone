@@ -7,8 +7,13 @@ export default function ChatPart({ data, ChatId, loading, setRefreshTrigger }) {
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    setAllMessages([]);
-  }, [ChatId]);
+    if (data) {
+      const combined = [...(data.send || []), ...(data.receiver || [])]
+        .sort((a, b) => new Date(a.time) - new Date(b.time));
+      setAllMessages(combined);
+    }
+  }, [data]);
+  
 
   useEffect(() => {
     if (data) {
