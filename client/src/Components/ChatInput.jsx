@@ -30,7 +30,7 @@ export default function ChatInput({ id, setRefreshTrigger }) {
           
 
       return (
-            <section className='absolute bottom-[40px] left-50% w-[80%] z-20'>
+            <section className='absolute bottom-[40px] left-50% w-[60%] z-20'>
                   <form autoComplete='off' onSubmit={handleSend} className="w-[100%] flex items-center justify-between gap-3.5">
                         <input
                               name='message'

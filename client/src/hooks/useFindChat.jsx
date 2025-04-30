@@ -2,18 +2,6 @@ import { useState } from "react";
 import userServices from "../service/user.service.js";
 import { useNavigate } from 'react-router-dom';
 
-
-
-
-
-
-
-
-
-
-
-
-
 export const useFindChat = () => {
       const [data, setData] = useState({});
       const [loading, setLoading] = useState(false);
@@ -30,7 +18,6 @@ export const useFindChat = () => {
 
                   const response = await userServices.findChat(to, token);
                   setData(response);
-                  console.log(response)
                   return response;
             } catch (err) {
                   setError(err);

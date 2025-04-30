@@ -79,6 +79,10 @@ class UserServices {
             return this.request(`${this.baseUrl}/users/friends/remove/${friendId}`, 'GET', null, token);
       }
 
+      async deleteMessage(messageId, token){
+            return this.request(`${this.baseUrl}/chat/delete/${messageId}`, 'GET', null, token);
+      }
+
 }
 
 const userServices = new UserServices()
