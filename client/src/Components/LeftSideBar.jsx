@@ -33,9 +33,10 @@ export default function LeftSideBar({ sampleChatData = [] }) {
 
 
   // Decide whether to show search results or default chat data
-  const displayChats = searchQuery.trim() ? users : sampleChatData;
+  const displayChats = activeSearch
+  ? (searchQuery.trim() ? users : [])  // if active search and input is empty => []
+  : sampleChatData;                    // if not searching => show original list
 
-  console.log(displayChats);
   
 
   return (
@@ -44,8 +45,9 @@ export default function LeftSideBar({ sampleChatData = [] }) {
       <aside className="w-full md:w-[370px] flex flex-col bg-tg-secondary-bg bg-neutral-800 backdrop-blur-sm">
         <LeftUserSearch onSearch={setSearchQuery} setActiveSearch={setActiveSearch}/>
         {
-          activeSearch ? <ChatSearchList chats={displayChats} activeChatId={activeChatId} onChatSelect={handleChatSelect} loading={searchLoading} />
-         : <ChatList chats={displayChats} activeChatId={activeChatId} onChatSelect={handleChatSelect} loading={searchLoading} />
+          activeSearch
+            ? <ChatSearchList chats={displayChats} activeChatId={activeChatId} onChatSelect={handleChatSelect} loading={searchLoading} />
+            : <ChatList chats={sampleChatData} activeChatId={activeChatId} onChatSelect={handleChatSelect} loading={searchLoading} />
         }
       </aside>
 

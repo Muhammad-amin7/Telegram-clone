@@ -75,6 +75,10 @@ class UserServices {
             return this.request(`${this.baseUrl}/users/friends/add/${userId}`, 'GET', null, token);
       }
 
+      async deleteFriend(friendId, token){
+            return this.request(`${this.baseUrl}/users/friends/remove/${friendId}`, 'GET', null, token);
+      }
+
 }
 
 const userServices = new UserServices()

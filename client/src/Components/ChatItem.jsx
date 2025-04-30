@@ -1,5 +1,5 @@
-// src/components/ChatItem.jsx
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import { useDeleteFriend } from '../hooks/useDeleteFriend';
 
 const Avatar = ({ type = 'initials', value, color = 'bg-blue-500' }) => {
     if (type === 'image' && value) {
@@ -21,14 +21,42 @@ const Avatar = ({ type = 'initials', value, color = 'bg-blue-500' }) => {
 };
 
 export default function ChatItem({ chat, isActive, onSelect }) {
+    const { deleteFriendId, loading } = useDeleteFriend();
+    const [showDelete, setShowDelete] = useState(false);
+    const timerRef = useRef(null);
+
     const backgroundClass = isActive ? 'bg-tg-active-bg' : 'hover:bg-tg-hover-bg';
     const previewColorClass = isActive ? 'text-white' : 'text-gray-400';
     const active = isActive ? 'bg-[#8774e1]' : '';
 
+    const handleContextMenu = (e) => {
+        e.preventDefault();
+        setShowDelete(true);
+    };
+
+    const handleTouchStart = () => {
+        timerRef.current = setTimeout(() => {
+            setShowDelete(true);
+        }, 600);
+    };
+
+    const handleTouchEnd = () => {
+        clearTimeout(timerRef.current);
+    };
+
+    const handleDelete = async (e) => {
+        e.stopPropagation();
+        await deleteFriendId(chat._id);
+        setShowDelete(false);
+    };
+
     return (
         <li
-            className={`flex items-center space-x-3 p-2 ${backgroundClass} cursor-pointer mx-1 rounded-lg ${active}`}
+            className={`relative flex items-center space-x-3 p-2 ${backgroundClass} cursor-pointer mx-1 rounded-lg ${active}`}
             onClick={() => onSelect(chat._id)}
+            onContextMenu={handleContextMenu}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
         >
             <div className="flex-shrink-0">
                 <Avatar type={chat.avatarType} value={chat.firstName} color={chat.avatarColor} />
@@ -49,6 +77,16 @@ export default function ChatItem({ chat, isActive, onSelect }) {
                     )}
                 </div>
             </div>
+
+            {showDelete && (
+                <button
+                    className="absolute right-2 top-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-10"
+                    onClick={handleDelete}
+                    disabled={loading}
+                >
+                    {loading ? "Deleting..." : "Delete"}
+                </button>
+            )}
         </li>
     );
 }

@@ -41,12 +41,15 @@ export default function ChatSearchItem({ chat, isActive, onSelect, onAddFriend }
       </div>
 
       {/* Right side - Add Friend Button */}
-      <button
-        onClick={() => onAddFriend(chat._id)}
-        className="text-tg-accent hover:text-white text-xl p-1"
-      >
-        <AiOutlineUserAdd />
-      </button>
+      {!chat.isFriend && (
+        <button
+          onClick={() => onAddFriend(chat._id)}
+          className="text-tg-accent hover:text-white text-xl p-1"
+        >
+          <AiOutlineUserAdd />
+        </button>
+      )}
+
     </li>
   );
 }
