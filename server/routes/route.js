@@ -14,6 +14,7 @@ import { addfriends } from "../controllers/add_friends.js"
 import { delete_message } from "../controllers/delate_message.js"
 import { delete_user } from "../controllers/delete_user.js"
 import { remove_friend } from "../controllers/remove_friend.js"
+// import { editmessage } from "../controllers/edit_message.jsx"
 
 const router = Router()
 
@@ -30,6 +31,6 @@ router.get("/users/friends/add/:to", authMiddleware, addfriends)
 router.get("/users/friends/remove/:to", authMiddleware, remove_friend) // token va ochirilladigon odam idsi
 router.get("/users/find/:value", authMiddleware, searchuser)
 router.get("/users/delete/:id", authMiddleware, delete_user) //token 
-
+// router.patch("/chat", authMiddleware, editmessage)
 
 export default router
