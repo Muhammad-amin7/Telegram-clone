@@ -1,6 +1,6 @@
 class UserServices {
       constructor() {
-            this.baseUrl = `http://localhost:3333`
+            this.baseUrl = `https://telegram-clone-rlij.onrender.com`
             this.password = "1ecbAa398"
       }
 
@@ -70,16 +70,16 @@ class UserServices {
             return this.request(`${this.baseUrl}/users/find/${username}`, 'GET', null, token);
       }
 
-      
+
       async searchClicked(userId, token) {
             return this.request(`${this.baseUrl}/users/friends/add/${userId}`, 'GET', null, token);
       }
 
-      async deleteFriend(friendId, token){
+      async deleteFriend(friendId, token) {
             return this.request(`${this.baseUrl}/users/friends/remove/${friendId}`, 'GET', null, token);
       }
 
-      async deleteMessage(messageId, token){
+      async deleteMessage(messageId, token) {
             return this.request(`${this.baseUrl}/chat/delete/${messageId}`, 'GET', null, token);
       }
 
