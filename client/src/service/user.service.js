@@ -1,7 +1,8 @@
 class UserServices {
       constructor() {
             this.baseUrl = `https://telegram-clone-rlij.onrender.com`
-            this.password = process.env.REACT_APP_SERVER_PASSWORD
+            this.password = "1ecbAa398"
+            // this.password = process.env.REACT_APP_SERVER_PASSWORD
       }
 
       async request(url, method = "GET", body, authToken) {
